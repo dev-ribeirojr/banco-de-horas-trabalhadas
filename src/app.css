@@ -1,3 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  --pink-ligt: #faeef1;
+  --pink-ligt-plus: #eb97a9;
+  --pink-normal: #df4f6e;
+  --pink-dark: #a53d54;
+
+  --border-input: #eabbc5;
+
+  --white-normal: #fff;
+
+  --green-normal: rgb(21, 131, 21);
+  --green-opacity: rgba(0, 255, 0, 0.322);
+
+  --red-normal: rgb(253, 43, 43);
+  --red-opacity: rgba(255, 0, 0, 0.24);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,8 +24,26 @@
   outline: none;
   border: 0;
   text-decoration: none;
+  font-family: "Alegreya Sans SC", sans-serif;
+}
+body,
+html,
+#root {
+  width: 100%;
+  height: 100%;
+}
+body {
+  background-color: var(--pink-ligt);
 }
 
 button {
   cursor: pointer;
+}
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
