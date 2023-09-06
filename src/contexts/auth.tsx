@@ -11,6 +11,7 @@ import { auth, db } from "../services/firebaseConection";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
@@ -22,7 +23,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const localStorageKey = "@dataUserBancoHoras";
 
   const [loadingLogin, setLoadingLogin] = useState<boolean>(false);
-  const [user, setUser] = useState<object>();
+  const [user, setUser] = useState<object | null>();
   const [loadingUSer, setLoadingUser] = useState<boolean>(true);
   const [incorrectPassword, setIncorrectPassword] = useState<boolean>(false);
 
@@ -129,6 +130,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(localStorageKey, JSON.stringify(data));
   }
 
+  async function logOut() {
+    await signOut(auth)
+      .then(() => {
+        localStorage.removeItem(localStorageKey);
+        setUser(null);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -140,6 +152,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         statusMessage,
         setIncorrectPassword,
         loadingUSer,
+        logOut,
       }}
     >
       {children}
