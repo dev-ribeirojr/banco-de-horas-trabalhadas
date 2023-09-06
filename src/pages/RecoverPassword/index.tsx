@@ -13,7 +13,7 @@ import { auth } from "../../services/firebaseConection";
 import { sendPasswordResetEmail } from "firebase/auth";
 
 import { LoadingCircle } from "../../components/loading";
-import { FormProps } from "../../components/@types/RecoverTypes";
+import { FormProps } from "../../components/types/RecoverTypes";
 
 const schema = z.object({
   email: z

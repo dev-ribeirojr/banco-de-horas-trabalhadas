@@ -4,7 +4,7 @@ import {
   DataUserProps,
   UserSignInProps,
   UserSignUpProps,
-} from "../components/@types/AuthType";
+} from "../components/types/AuthType";
 
 import { ReactNode, createContext } from "react";
 import { auth, db } from "../services/firebaseConection";
@@ -145,6 +145,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         signed: !!user,
+        user,
         signUp,
         signIn,
         loadingLogin,

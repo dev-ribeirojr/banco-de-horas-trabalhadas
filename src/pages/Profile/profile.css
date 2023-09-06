@@ -1,0 +1,102 @@
+.page-profile .content-profile {
+  border: 1px solid var(--pink-ligt-plus);
+  border-radius: 4px;
+  padding-bottom: 1em;
+}
+.page-profile .header-profile {
+  position: relative;
+}
+.page-profile .header-profile div {
+  background: linear-gradient(45deg, var(--pink-normal), var(--pink-dark));
+  height: 100px;
+}
+.page-profile .img-profile {
+  border-radius: 50%;
+  border: 4px solid var(--pink-ligt);
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.page-profile .info-profile {
+  display: flex;
+}
+.page-profile .info-profile .info {
+  margin-top: 4em;
+  padding: 0 30px;
+  flex: 1;
+}
+.page-profile .info-profile .name {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 0.5em;
+}
+.page-profile .info-profile .button-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--pink-normal);
+
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  color: var(--white-normal);
+  transition: background 0.3s;
+}
+.page-profile .info-profile .button-edit:hover {
+  background: var(--pink-dark);
+}
+.page-profile .info-profile h1 {
+  color: var(--pink-normal);
+  font-size: 1.2em;
+}
+.page-profile .info-profile input {
+  height: 30px;
+  border: 1px solid var(--pink-ligt);
+  color: var(--pink-normal);
+  background: var(--white-normal);
+  font-size: 1em;
+  border-radius: 2em;
+  padding: 4px 16px;
+  width: 100%;
+  box-shadow: inset 0 0 4px #df4f6e7e;
+}
+.page-profile .info-profile input::placeholder {
+  color: var(--pink-ligt-plus);
+}
+.page-profile .info-profile .email {
+  cursor: not-allowed;
+  margin-bottom: 1em;
+}
+.page-profile .info-profile .button-edit-password {
+  background: var(--pink-normal);
+  padding: 4px 8px;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: bold;
+  color: var(--white-normal);
+  border-radius: 2em;
+  height: 30px;
+}
+.page-profile .info-profile .button-edit-password:hover {
+  background: var(--pink-dark);
+}
+
+/*----------------  Form -------------------*/
+.page-profile .info-profile form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  margin-right: 2.5em;
+  margin-top: 2em;
+}
+.page-profile .info-profile form input {
+  margin-bottom: 0.25em;
+}
+.page-profile .info-profile form button {
+  margin-top: 1em;
+}

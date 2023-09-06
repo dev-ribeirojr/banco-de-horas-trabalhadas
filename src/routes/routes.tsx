@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 
 import Private from "./Private";
 import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 
 export default function RoutesApp() {
   return (
@@ -18,6 +19,14 @@ export default function RoutesApp() {
         element={
           <Private>
             <Home />
+          </Private>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <Private>
+            <Profile />
           </Private>
         }
       />

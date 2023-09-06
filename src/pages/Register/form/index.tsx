@@ -11,7 +11,7 @@ import { LoadingCircle } from "../../../components/loading";
 import "../../../components/Input/input.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSignUpProps } from "../../../components/@types/AuthType";
+import { UserSignUpProps } from "../../../components/types/AuthType";
 
 const schema = z.object({
   password: z.string().min(6, "Crie um senha com pelomenos 6 digitos"),

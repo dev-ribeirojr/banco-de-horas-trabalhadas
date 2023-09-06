@@ -10,7 +10,7 @@ import { LoadingCircle } from "../../../components/loading";
 import "../../../components/Input/input.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSignInProps } from "../../../components/@types/AuthType";
+import { UserSignInProps } from "../../../components/types/AuthType";
 
 const schema = z.object({
   password: z.string().nonempty("Digite sua senha!"),

@@ -1,5 +1,4 @@
 .header {
-  width: fit-content;
   border-radius: 4px;
   overflow: hidden;
   background: transparent;
@@ -8,6 +7,8 @@
   right: 1em;
   top: 50%;
   transform: translateY(-50%);
+
+  z-index: 999;
 }
 
 .header nav {
@@ -20,7 +21,6 @@
 }
 .header nav a,
 .header nav button {
-  width: fit-content;
   background-color: var(--pink-ligt-plus);
   color: var(--pink-ligt);
   padding: 0.5em;
