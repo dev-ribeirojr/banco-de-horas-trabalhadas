@@ -1,0 +1,49 @@
+.header {
+  width: fit-content;
+  border-radius: 4px;
+  overflow: hidden;
+  background: transparent;
+
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.header .text-header {
+  display: none;
+}
+.header nav a,
+.header nav button {
+  width: fit-content;
+  background-color: var(--pink-ligt-plus);
+  color: var(--pink-ligt);
+  padding: 0.5em;
+
+  display: flex;
+  align-items: center;
+  gap: 1em;
+
+  transition: background 0.3s;
+}
+.header nav button {
+  font-size: 1em;
+}
+.header nav a:hover,
+.header nav button:hover {
+  background-color: var(--pink-dark);
+  border-radius: 4px;
+}
+.header:hover nav a,
+.header:hover nav button {
+  border-radius: 4px;
+}
+.header nav a:hover .text-header,
+.header nav button:hover .text-header {
+  display: block;
+}
