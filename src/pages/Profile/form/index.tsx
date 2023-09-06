@@ -1,8 +1,4 @@
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { PasswordsProps } from "../../../components/types/EditPasswordTyp";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   EmailAuthProvider,
   User,
@@ -13,33 +9,13 @@ import { auth } from "../../../services/firebaseConection";
 import { LoadingCircle } from "../../../components/loading";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth";
+import { UpdateProps } from "../../../components/types/ProfileProps";
+import { UpdatePasswordForm } from "../../../hooks/UpdatePasswordForm";
 
-const schema = z
-  .object({
-    currentPassword: z.string().nonempty("Digite sua senha atual!"),
-    newPassword: z.string().min(6, "Senha precisa ter pelo menos 6 digitos!"),
-    confirmNewPassword: z.string().nonempty("É necessário confirmar a senha!"),
-  })
-  .refine((data) => data.confirmNewPassword === data.newPassword, {
-    message: "As senhas não coincidem",
-    path: ["confirmNewPassword"],
-  });
-
-type UpdateProps = {
-  newPassword: string;
-  currentPassword: string;
-};
+import ErrorText from "../../../components/Error";
 
 export function FormEditPassword({ render }: any) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PasswordsProps>({
-    mode: "all",
-    reValidateMode: "onChange",
-    resolver: zodResolver(schema),
-  });
+  const { register, handleSubmit, errors } = UpdatePasswordForm();
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
@@ -116,6 +92,7 @@ export function FormEditPassword({ render }: any) {
       {errors.confirmNewPassword && (
         <p className="error-text">{errors.confirmNewPassword.message}</p>
       )}
+      {/* <ErrorText statusMessage="ouve algum erro" /> */}
       <button type="submit" className="button-edit-password" disabled={loading}>
         {loading ? <LoadingCircle /> : "ENVIAR"}
       </button>

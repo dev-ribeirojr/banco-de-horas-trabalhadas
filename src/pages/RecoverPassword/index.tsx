@@ -2,11 +2,6 @@ import { useState } from "react";
 import "./recoverPassword.css";
 
 import { Link } from "react-router-dom";
-
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { MdEmail } from "react-icons/md";
 
 import { auth } from "../../services/firebaseConection";
@@ -14,13 +9,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 
 import { LoadingCircle } from "../../components/loading";
 import { FormProps } from "../../components/types/RecoverTypes";
-
-const schema = z.object({
-  email: z
-    .string()
-    .email("Digite um email válido!")
-    .nonempty("Digite seu email!"),
-});
+import { RecoverPasswordForm } from "../../hooks/RecoverPasswordForm";
 
 export default function RecoverPassword() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,13 +19,7 @@ export default function RecoverPassword() {
     "Link de recuperação enviado!"
   );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormProps>({
-    resolver: zodResolver(schema),
-  });
+  const { register, handleSubmit, errors } = RecoverPasswordForm();
 
   function handleRecoverStatus() {
     setRecoverStatus(true);

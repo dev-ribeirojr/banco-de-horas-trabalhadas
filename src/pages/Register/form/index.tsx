@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
 
 import { MdEmail, MdLock } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
@@ -9,28 +8,12 @@ import { LoadingCircle } from "../../../components/loading";
 
 // remover quando componentizar os inputs
 import "../../../components/Input/input.css";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignUpProps } from "../../../components/types/AuthType";
-
-const schema = z.object({
-  password: z.string().min(6, "Crie um senha com pelomenos 6 digitos"),
-  email: z.string().email("Digite um email válido!"),
-  name: z.string().nonempty("Digite seu nome"),
-});
+import { RegisterForm } from "../../../hooks/RegisterForm";
 
 export function FormRegister() {
   const { signUp, loadingLogin, statusMessage } = useContext(AuthContext);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserSignUpProps>({
-    mode: "all",
-    reValidateMode: "onChange",
-    resolver: zodResolver(schema),
-  });
+  const { register, handleSubmit, errors } = RegisterForm();
 
   async function handleSubmitForm(data: UserSignUpProps) {
     signUp(data);

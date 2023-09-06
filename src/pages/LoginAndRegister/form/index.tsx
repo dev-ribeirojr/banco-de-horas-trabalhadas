@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
 
 import { MdEmail, MdLock } from "react-icons/md";
 
@@ -8,35 +7,18 @@ import { LoadingCircle } from "../../../components/loading";
 
 // remover quando componentizar os inputs
 import "../../../components/Input/input.css";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSignInProps } from "../../../components/types/AuthType";
 
-const schema = z.object({
-  password: z.string().nonempty("Digite sua senha!"),
-  email: z
-    .string()
-    .email("Digite um email válido!")
-    .nonempty("Digite um email!"),
-});
+import { UserSignInProps } from "../../../components/types/AuthType";
+import { LoginForm } from "../../../hooks/LoginForm";
+import ErrorText from "../../../components/Error";
 
 export function FormLogin() {
   const { signIn, loadingLogin, statusMessage } = useContext(AuthContext);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserSignInProps>({
-    mode: "all",
-    reValidateMode: "onChange",
-    resolver: zodResolver(schema),
-  });
+  const { register, handleSubmit, errors } = LoginForm();
 
   async function handleSubmitForm(data: UserSignInProps) {
     signIn(data);
   }
-
   return (
     <form
       onSubmit={handleSubmit(handleSubmitForm)}
@@ -69,10 +51,7 @@ export function FormLogin() {
       {errors.password && (
         <p className="error-text">{errors.password.message}</p>
       )}
-      {statusMessage !== "" && (
-        <p className="info-message info-error">{statusMessage}</p>
-      )}
-
+      {statusMessage !== "" && <ErrorText statusMessage={statusMessage} />}
       <button type="submit" className="button-submit" disabled={loadingLogin}>
         {loadingLogin ? <LoadingCircle /> : "Entrar"}
       </button>
