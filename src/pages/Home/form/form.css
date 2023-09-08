@@ -1,0 +1,55 @@
+.form-add {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.form-add label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--pink-normal);
+}
+.form-add label input,
+.form-add button {
+  border: 1px solid var(--pink-ligt-plus);
+  border-radius: 2em;
+  padding: 4px 8px;
+  box-shadow: inset 0 0 4px #df4f6e7e;
+  color: var(--pink-normal);
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.form-add label input[type="time"] {
+  width: 90px;
+}
+.form-add label input[type="text"] {
+  padding: 6px 8px;
+}
+.form-add label input:disabled {
+  background-color: var(--white-normal);
+  cursor: not-allowed;
+  width: 55px;
+}
+.form-add label input:disabled::placeholder {
+  color: var(--pink-normal);
+}
+.form-add button {
+  width: 35px;
+  height: 35px;
+  align-self: flex-end;
+  background-color: var(--white-normal);
+  font-size: 1.5em;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s;
+}
+.form-add button:hover {
+  background-color: var(--pink-normal);
+  color: var(--white-normal);
+}
