@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   AuthContextType,
   DataUserProps,
+  User,
   UserSignInProps,
   UserSignUpProps,
 } from "../components/types/AuthType";
@@ -23,7 +24,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const localStorageKey = "@dataUserBancoHoras";
 
   const [loadingLogin, setLoadingLogin] = useState<boolean>(false);
-  const [user, setUser] = useState<object | null>();
+  const [user, setUser] = useState<User | null>(null);
   const [loadingUSer, setLoadingUser] = useState<boolean>(true);
   const [incorrectPassword, setIncorrectPassword] = useState<boolean>(false);
 

@@ -8,6 +8,13 @@ export type DataUserProps = {
   createdAcount: Timestamp | Date;
 };
 
+export type User = {
+  uid: string;
+  name: string;
+  email: string;
+  createdAcount: Timestamp | Date;
+};
+
 export type UserSignInProps = {
   password: string;
   email: string;
@@ -19,7 +26,7 @@ export type UserCreatedProps = {
 export type UserSignUpProps = UserCreatedProps & UserSignInProps;
 
 export type AuthContextType = {
-  user: object | null | undefined;
+  user: User;
   signed: boolean;
   signIn: ({ email, password }: UserSignInProps) => Promise<void>;
   signUp: ({ name, email, password }: UserSignUpProps) => Promise<void>;

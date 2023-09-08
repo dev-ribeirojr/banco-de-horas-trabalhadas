@@ -10,7 +10,7 @@ import "../../../components/Input/input.css";
 
 import { UserSignInProps } from "../../../components/types/AuthType";
 import { LoginForm } from "../../../hooks/LoginForm";
-import ErrorText from "../../../components/Error";
+import StatusText from "../../../components/StatusMessage";
 
 export function FormLogin() {
   const { signIn, loadingLogin, statusMessage } = useContext(AuthContext);
@@ -51,7 +51,9 @@ export function FormLogin() {
       {errors.password && (
         <p className="error-text">{errors.password.message}</p>
       )}
-      {statusMessage !== "" && <ErrorText statusMessage={statusMessage} />}
+      {statusMessage !== "" && (
+        <StatusText statusMessage={statusMessage} status="info-error" />
+      )}
       <button type="submit" className="button-submit" disabled={loadingLogin}>
         {loadingLogin ? <LoadingCircle /> : "Entrar"}
       </button>

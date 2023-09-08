@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./profile.css";
 
 import { Header } from "../../components/Header";
@@ -7,9 +7,11 @@ import avatar from "../../assets/avatar.png";
 
 import { MdEdit } from "react-icons/md";
 import { FormEditPassword } from "./form";
+import { AuthContext } from "../../contexts/auth";
 
 export default function Profile() {
   const [renderForm, setRenderForm] = useState<boolean>(false);
+  const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -29,16 +31,12 @@ export default function Profile() {
           <section className="info-profile">
             <section className="info">
               <section className="name">
-                <h1>PABLO ALVES</h1>
+                <h1>{user?.name}</h1>
                 <button className="button-edit name">
                   <MdEdit size={18} />
                 </button>
               </section>
-              <input
-                placeholder="pabloallves@teste.com"
-                disabled
-                className="email"
-              />
+              <input placeholder={user?.email} disabled className="email" />
               <button
                 className="button-edit-password"
                 onClick={() => setRenderForm(!renderForm)}
@@ -46,7 +44,7 @@ export default function Profile() {
                 {renderForm ? "CANCELAR" : "TROCAR SENHA"}
               </button>
             </section>
-            {renderForm && <FormEditPassword render={setRenderForm} />}
+            {renderForm && <FormEditPassword />}
           </section>
         </section>
       </section>

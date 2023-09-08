@@ -9,17 +9,34 @@ import { auth } from "../../../services/firebaseConection";
 import { LoadingCircle } from "../../../components/loading";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth";
-import { UpdateProps } from "../../../components/types/ProfileProps";
+import { InfoText, UpdateProps } from "../../../components/types/ProfileProps";
 import { UpdatePasswordForm } from "../../../hooks/UpdatePasswordForm";
 
-import ErrorText from "../../../components/Error";
+import StatusText from "../../../components/StatusMessage";
 
-export function FormEditPassword({ render }: any) {
+export function FormEditPassword() {
   const { register, handleSubmit, errors } = UpdatePasswordForm();
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const { logOut } = useContext(AuthContext);
+  const [statusMessage, setStatusMessage] = useState<string>("");
+  const [redirecting, setRedirecting] = useState<boolean>(false);
+  const [status, setStatus] = useState<InfoText>({ status: "info-error" });
+
+  function handleRedirect() {
+    setTimeout(() => {
+      navigate("/");
+      logOut();
+      setRedirecting(false);
+    }, 5000);
+  }
+
+  function renderMessage() {
+    setTimeout(() => {
+      setStatusMessage("");
+    }, 5000);
+  }
 
   async function handleUpdatePassword({
     newPassword,
@@ -30,35 +47,39 @@ export function FormEditPassword({ render }: any) {
     const credentialEmail = userAuth?.email;
 
     if (userAuth && credentialEmail) {
-      //credential!
       const credential = EmailAuthProvider.credential(
         credentialEmail,
         currentPassword
       );
       await reauthenticateWithCredential(userAuth, credential)
         .then(async () => {
-          console.log("senha correta");
           await updatePassword(userAuth, newPassword)
             .then(() => {
-              //informar que a senha foi alterada e informar para fazer login novamente
-              navigate("/");
-              logOut();
               setLoading(false);
-              render(false);
+              setStatus({ status: "info-sucess" });
+              setStatusMessage("Senha alterada, faça login novamente!");
+
+              setRedirecting(true);
+              renderMessage();
+              handleRedirect();
             })
             .catch((er) => {
               console.log(er);
-              //informar erro
+              setStatusMessage("Ops! Aconteceu algum erro!");
+              setStatus({ status: "info-error" });
               setLoading(false);
+              renderMessage();
             });
         })
         .catch((er) => {
           setLoading(false);
-          //senha está incorreta
+          setStatus({ status: "info-error" });
+          renderMessage();
           if (er.code === "auth/wrong-password") {
-            //senha incorreta
+            setStatusMessage("Senha incorreta!");
             return;
           }
+          setStatusMessage("Ops! Aconteceu algum erro!");
           console.log(er);
         });
     }
@@ -74,6 +95,9 @@ export function FormEditPassword({ render }: any) {
       />
       {errors.currentPassword && (
         <p className="error-text">{errors.currentPassword.message}</p>
+      )}
+      {statusMessage === "Senha incorreta!" && (
+        <StatusText statusMessage={statusMessage} status={status.status} />
       )}
       <input
         type="password"
@@ -92,8 +116,14 @@ export function FormEditPassword({ render }: any) {
       {errors.confirmNewPassword && (
         <p className="error-text">{errors.confirmNewPassword.message}</p>
       )}
-      {/* <ErrorText statusMessage="ouve algum erro" /> */}
-      <button type="submit" className="button-edit-password" disabled={loading}>
+      {statusMessage !== "" && statusMessage !== "Senha incorreta!" && (
+        <StatusText statusMessage={statusMessage} status={status.status} />
+      )}
+      <button
+        type="submit"
+        className="button-edit-password"
+        disabled={loading || redirecting}
+      >
         {loading ? <LoadingCircle /> : "ENVIAR"}
       </button>
     </form>

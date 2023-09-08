@@ -1,0 +1,17 @@
+.info-message {
+  padding: 2px 0;
+  width: 100%;
+  border-radius: 2em;
+  text-align: center;
+}
+
+.info-error {
+  border: 1px solid var(--red-normal);
+  color: var(--red-normal);
+  background-color: var(--red-opacity);
+}
+.info-sucess {
+  border: 1px solid var(--green-normal);
+  color: var(--green-normal);
+  background-color: var(--green-opacity);
+}
