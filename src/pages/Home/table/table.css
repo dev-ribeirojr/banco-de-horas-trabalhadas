@@ -1,0 +1,89 @@
+.area-table {
+  width: 100%;
+}
+.area-table h1 {
+  text-align: center;
+  font-size: 2em;
+  background-color: var(--pink-dark);
+  color: var(--white-normal);
+  margin-bottom: 1em;
+  border-radius: 1em;
+}
+
+table {
+  color: var(--pink-normal);
+  border-collapse: collapse;
+  border-radius: 8px;
+  border: 1px solid var(--pink-ligt-plus);
+  margin-bottom: 1em;
+}
+
+table thead tr th {
+  color: var(--white-normal);
+  background-color: var(--pink-normal);
+  padding: 4px 8px;
+  width: 110px;
+}
+table thead tr .edit {
+  width: 50px;
+}
+table thead .trtitle th {
+  background-color: var(--pink-ligt);
+  color: var(--pink-normal);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+table thead tr th + th {
+  border-left: 1px solid var(--white-normal);
+}
+
+table tbody tr {
+  font-weight: 450;
+}
+table tbody tr:nth-child(even) {
+  background-color: var(--pink-ligt-plus);
+  color: #fff;
+}
+table tbody tr:nth-child(even) td + td {
+  border-left: 1px solid var(--pink-normal);
+}
+table tbody tr + tr {
+  border-top: 1px solid var(--pink-ligt-plus);
+}
+table tbody tr td {
+  text-align: center;
+  padding: 2px 8px;
+}
+table tbody tr td + td {
+  border-left: 1px solid var(--pink-ligt-plus);
+}
+table tbody tr td:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table tbody tr td button {
+  font-size: 1.2em;
+  background-color: var(--pink-normal);
+  color: var(--white-normal);
+  border-radius: 5px;
+  padding: 1px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s;
+}
+table tbody tr td button:hover {
+  background-color: var(--pink-dark);
+}
+table tfoot tr {
+  background-color: var(--pink-normal);
+  color: var(--white-normal);
+  text-align: center;
+}
+table tfoot tr td + td {
+  border-left: 1px solid var(--white-normal);
+}

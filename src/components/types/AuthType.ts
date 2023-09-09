@@ -26,7 +26,7 @@ export type UserCreatedProps = {
 export type UserSignUpProps = UserCreatedProps & UserSignInProps;
 
 export type AuthContextType = {
-  user: User;
+  user: User | null;
   signed: boolean;
   signIn: ({ email, password }: UserSignInProps) => Promise<void>;
   signUp: ({ name, email, password }: UserSignUpProps) => Promise<void>;

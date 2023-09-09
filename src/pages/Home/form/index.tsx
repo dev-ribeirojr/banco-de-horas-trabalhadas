@@ -1,24 +1,15 @@
-import { useState } from "react";
 import "./form.css";
-import { DateForm } from "../../../components/types/HomeTypes";
 import { HomeForm } from "../../../hooks/FormHors";
+import {
+  DadosBanco,
+  DateForm,
+  Day,
+  Month,
+} from "../../../components/types/HomeTypes";
+import { months } from "../../../constants/months";
 
-export function FormHors({ setDadosBanco, dadosBanco }: any) {
+export function FormHors({ dadosBanco, setDadosBanco }: any) {
   const { register, handleSubmit, errors } = HomeForm();
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
 
   function handleAdd({
     date,
@@ -29,11 +20,11 @@ export function FormHors({ setDadosBanco, dadosBanco }: any) {
   }: DateForm) {
     const monthNumber = Number(date.slice(5, 7));
     const monthName = months[monthNumber - 1];
-    const year = date.slice(0, 4);
+    const yearAdd = date.slice(0, 4);
 
-    const fullDataBanco = dadosBanco;
+    const list = dadosBanco;
 
-    const day = {
+    const day: Day = {
       date,
       start,
       startInterval,
@@ -41,47 +32,48 @@ export function FormHors({ setDadosBanco, dadosBanco }: any) {
       end,
       total: "total",
     };
-    const month = {
-      id: monthNumber,
+    const month: Month = {
+      id: String(monthNumber),
       month: monthName,
       days: [day],
     };
-    const existYear = fullDataBanco.findIndex(
-      (data: any) => data.year === year
-    );
 
+    const existYear = dadosBanco.findIndex(
+      (doc: DadosBanco) => doc.year === yearAdd
+    );
     if (existYear !== -1) {
       // ano cadastrado
       const indexYear = existYear;
-      const months = fullDataBanco[existYear].months;
+      const months = dadosBanco[existYear].months;
       const existMonth = months.findIndex(
-        (item: any) => item.month === monthName
+        (item: Month) => item.month === monthName
       );
+
       if (existMonth !== -1) {
         //mes ja cadatrado
         const indexMonth = existMonth;
-        const days = fullDataBanco[indexYear].months[indexMonth].days;
-        const existDay = days.findIndex((day: any) => day.date === date);
+        const days = dadosBanco[indexYear].months[indexMonth].days;
+        const existDay = days.findIndex((day: Day) => day.date === date);
 
         if (existDay !== -1) {
           // dia ja cadastrado apenas informar
           return;
         }
         // dia não cadastrado ainda
-        fullDataBanco[indexYear].months[indexMonth].days.push(day);
+        dadosBanco[indexYear].months[indexMonth].days.push(day);
       } else {
         //mes não cadastrado
-        fullDataBanco[indexYear].months.push(month);
+        dadosBanco[indexYear].months.push(month);
       }
     } else {
-      fullDataBanco.push({
-        year,
+      // ano não cadastrado ainda
+      dadosBanco.push({
+        year: yearAdd,
         months: [month],
       });
     }
-    // ano não cadastrado ainda
 
-    setDadosBanco(fullDataBanco);
+    setDadosBanco([...list]);
   }
 
   return (
