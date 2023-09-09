@@ -7,9 +7,22 @@ import {
   Month,
 } from "../../../components/types/HomeTypes";
 import { months } from "../../../constants/months";
+import { calcularHoras } from "../../../functions/CalculoHors";
 
 export function FormHors({ dadosBanco, setDadosBanco }: any) {
   const { register, handleSubmit, errors } = HomeForm();
+
+  function handleHoras(
+    start: string,
+    startInterval: string,
+    endInterval: string,
+    end: string
+  ) {
+    let fullDay = calcularHoras(start, end);
+    let interval = calcularHoras(startInterval, endInterval);
+    let hors = calcularHoras(interval, fullDay);
+    return hors;
+  }
 
   function handleAdd({
     date,
@@ -30,7 +43,7 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
       startInterval,
       endInterval,
       end,
-      total: "total",
+      total: handleHoras(start, startInterval, endInterval, end),
     };
     const month: Month = {
       id: String(monthNumber),
@@ -102,10 +115,6 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
         Fim
         <input type="time" {...register("end")} />
         {errors.end && <p>X</p>}
-      </label>
-      <label>
-        Total
-        <input type="text" placeholder="08:00" disabled />
       </label>
       <button type="submit">+</button>
     </form>

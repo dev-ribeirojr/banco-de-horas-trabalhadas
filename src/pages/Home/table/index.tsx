@@ -3,6 +3,7 @@ import { DadosBanco, Day, Month } from "../../../components/types/HomeTypes";
 import { MdEdit } from "react-icons/md";
 
 export function Table({ dados }: any) {
+  // organizando a renderização das tabelas por ano, mes é dia
   dados.sort((a: DadosBanco, b: DadosBanco) => Number(a.year) - Number(b.year));
   dados.map((doc: DadosBanco) =>
     doc.months.sort((a: Month, b: Month) => Number(a.id) - Number(b.id))
@@ -22,7 +23,7 @@ export function Table({ dados }: any) {
     <section>
       {dados.map((doc: DadosBanco) => (
         <section key={doc.year} className="area-table">
-          <h1>Ano "{doc.year}"</h1>
+          <h1>Ano / "{doc.year}"</h1>
 
           {doc.months.map((month) => (
             <table key={month.id} className="table">
