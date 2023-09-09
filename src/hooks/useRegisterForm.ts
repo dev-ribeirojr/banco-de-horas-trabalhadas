@@ -3,7 +3,7 @@ import { UserSignUpProps } from "../components/types/AuthType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaRegister } from "../schema/RegisterSchema";
 
-export function RegisterForm() {
+export function useRegisterForm() {
   const {
     register,
     handleSubmit,

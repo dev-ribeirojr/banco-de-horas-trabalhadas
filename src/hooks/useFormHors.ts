@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaFormHors } from "../schema/FormHors";
 import { DateForm } from "../components/types/HomeTypes";
 
-export function HomeForm() {
+export function useHomeForm() {
   const {
     register,
     handleSubmit,

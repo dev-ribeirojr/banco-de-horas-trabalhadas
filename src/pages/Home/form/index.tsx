@@ -1,5 +1,5 @@
 import "./form.css";
-import { HomeForm } from "../../../hooks/FormHors";
+import { useHomeForm } from "../../../hooks/useFormHors";
 import {
   DadosBanco,
   DateForm,
@@ -10,7 +10,7 @@ import { months } from "../../../constants/months";
 import { calcularHoras } from "../../../functions/CalculoHors";
 
 export function FormHors({ dadosBanco, setDadosBanco }: any) {
-  const { register, handleSubmit, errors } = HomeForm();
+  const { register, handleSubmit, errors } = useHomeForm();
 
   function handleHoras(
     start: string,

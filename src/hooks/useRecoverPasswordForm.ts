@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { schemaRecoverPassword } from "../schema/RecoverPasswordSchema";
 import { FormProps } from "../components/types/RecoverTypes";
 
-export function RecoverPasswordForm() {
+export function useRecoverPasswordForm() {
   const {
     register,
     handleSubmit,

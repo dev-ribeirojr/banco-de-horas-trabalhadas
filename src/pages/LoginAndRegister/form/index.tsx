@@ -9,12 +9,12 @@ import { LoadingCircle } from "../../../components/loading";
 import "../../../components/Input/input.css";
 
 import { UserSignInProps } from "../../../components/types/AuthType";
-import { LoginForm } from "../../../hooks/LoginForm";
+import { useLoginForm } from "../../../hooks/useLoginForm";
 import StatusText from "../../../components/StatusMessage";
 
 export function FormLogin() {
   const { signIn, loadingLogin, statusMessage } = useContext(AuthContext);
-  const { register, handleSubmit, errors } = LoginForm();
+  const { register, handleSubmit, errors } = useLoginForm();
 
   async function handleSubmitForm(data: UserSignInProps) {
     signIn(data);

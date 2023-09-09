@@ -1,18 +1,19 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSignInProps } from "../components/types/AuthType";
-import { schemaLogin } from "../schema/LoginSchema";
+import { PasswordsProps } from "../components/types/EditPasswordTyp";
+import { schemaUpdatePassword } from "../schema/UpdatePasswordSchema";
 
-export function LoginForm() {
+export function useUpdatePasswordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSignInProps>({
+  } = useForm<PasswordsProps>({
     mode: "all",
     reValidateMode: "onChange",
-    resolver: zodResolver(schemaLogin),
+    resolver: zodResolver(schemaUpdatePassword),
   });
+
   return {
     register,
     handleSubmit,

@@ -9,11 +9,11 @@ import { LoadingCircle } from "../../../components/loading";
 // remover quando componentizar os inputs
 import "../../../components/Input/input.css";
 import { UserSignUpProps } from "../../../components/types/AuthType";
-import { RegisterForm } from "../../../hooks/RegisterForm";
+import { useRegisterForm } from "../../../hooks/useRegisterForm";
 
 export function FormRegister() {
   const { signUp, loadingLogin, statusMessage } = useContext(AuthContext);
-  const { register, handleSubmit, errors } = RegisterForm();
+  const { register, handleSubmit, errors } = useRegisterForm();
 
   async function handleSubmitForm(data: UserSignUpProps) {
     signUp(data);

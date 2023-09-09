@@ -9,7 +9,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 
 import { LoadingCircle } from "../../components/loading";
 import { FormProps } from "../../components/types/RecoverTypes";
-import { RecoverPasswordForm } from "../../hooks/RecoverPasswordForm";
+import { useRecoverPasswordForm } from "../../hooks/useRecoverPasswordForm";
 
 export default function RecoverPassword() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,7 +19,7 @@ export default function RecoverPassword() {
     "Link de recuperação enviado!"
   );
 
-  const { register, handleSubmit, errors } = RecoverPasswordForm();
+  const { register, handleSubmit, errors } = useRecoverPasswordForm();
 
   function handleRecoverStatus() {
     setRecoverStatus(true);

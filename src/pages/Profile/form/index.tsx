@@ -10,12 +10,12 @@ import { LoadingCircle } from "../../../components/loading";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth";
 import { InfoText, UpdateProps } from "../../../components/types/ProfileProps";
-import { UpdatePasswordForm } from "../../../hooks/UpdatePasswordForm";
+import { useUpdatePasswordForm } from "../../../hooks/useUpdatePasswordForm";
 
 import StatusText from "../../../components/StatusMessage";
 
 export function FormEditPassword() {
-  const { register, handleSubmit, errors } = UpdatePasswordForm();
+  const { register, handleSubmit, errors } = useUpdatePasswordForm();
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
