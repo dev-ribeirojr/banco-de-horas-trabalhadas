@@ -2,6 +2,8 @@ import "./table.css";
 import { DadosBanco, Day, Month } from "../../../components/types/HomeTypes";
 import { MdEdit } from "react-icons/md";
 
+import { format, parseISO } from "date-fns";
+
 export function Table({ dados }: any) {
   // organizando a renderização das tabelas por ano, mes é dia
   dados.sort((a: DadosBanco, b: DadosBanco) => Number(a.year) - Number(b.year));
@@ -44,7 +46,7 @@ export function Table({ dados }: any) {
               <tbody>
                 {month.days.map((day) => (
                   <tr key={day.date}>
-                    <td>{day.date}</td>
+                    <td>{format(parseISO(day.date), "dd/MM/yyyy")}</td>
                     <td>{day.start}</td>
                     <td className="td-interval">{day.startInterval}</td>
                     <td className="td-interval">{day.endInterval}</td>
