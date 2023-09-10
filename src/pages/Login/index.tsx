@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import "./loginAndRegister.css";
 
+import Logo from "../../assets/logo-banco.png";
+
 import { FormLogin } from "./form/index.jsx";
 import { AuthContext } from "../../contexts/auth.js";
 import { Link } from "react-router-dom";
@@ -18,6 +20,7 @@ export default function LoginAndRegister() {
   return (
     <div className="container">
       <section className="login">
+        <img src={Logo} alt="imagen da logo" width={120} className="logo" />
         <h1 className="login-title">Fazer Login</h1>
         <FormLogin />
         {incorrectPassword && (

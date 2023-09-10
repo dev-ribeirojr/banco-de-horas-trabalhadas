@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import LoginAndRegister from "../pages/LoginAndRegister";
+import Login from "../pages/Login";
 import RecoverPassword from "../pages/RecoverPassword";
 import Register from "../pages/Register";
 
@@ -11,7 +11,7 @@ import Profile from "../pages/Profile";
 export default function RoutesApp() {
   return (
     <Routes>
-      <Route path="/" element={<LoginAndRegister />} />
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/recover-password" element={<RecoverPassword />} />
       <Route

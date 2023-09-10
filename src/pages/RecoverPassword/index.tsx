@@ -10,6 +10,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { LoadingCircle } from "../../components/loading";
 import { FormProps } from "../../components/types/RecoverTypes";
 import { useRecoverPasswordForm } from "../../hooks/useRecoverPasswordForm";
+import Logo from "../../assets/logo-banco.png";
 
 export default function RecoverPassword() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -56,6 +57,7 @@ export default function RecoverPassword() {
   return (
     <section className="container">
       <section className="login recover">
+        <img src={Logo} alt="imagen da logo" width={120} className="logo" />
         <h1 className="login-title" style={{ marginBottom: 20 }}>
           Redefinir Senha
         </h1>

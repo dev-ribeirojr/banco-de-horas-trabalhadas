@@ -13,6 +13,10 @@
   position: relative;
   z-index: 44;
 }
+.login .logo {
+  align-self: center;
+  margin-bottom: 1em;
+}
 .login .login-title {
   color: var(--pink-normal);
   font-size: 2.5em;
