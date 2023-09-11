@@ -46,31 +46,35 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     loadUser();
   }, []);
 
+  async function handleAddDocUser(data: any, name: string) {
+    await setDoc(doc(db, "users", data.user.uid), {
+      name: name,
+      email: data.user.email,
+      createdAcount: new Date(),
+    })
+      .then(() => {
+        const dataDoc = {
+          uid: data.user.uid,
+          name: name,
+          email: data.user.email,
+          createdAcount: new Date(),
+        };
+        setUser(dataDoc);
+        storageUser(dataDoc);
+        setLoadingLogin(false);
+        navigate("/home");
+      })
+      .catch((er) => {
+        console.log(er);
+        setLoadingLogin(false);
+      });
+  }
+
   async function signUp({ name, email, password }: UserSignUpProps) {
     setLoadingLogin(true);
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (data) => {
-        await setDoc(doc(db, "users", data.user.uid), {
-          name: name,
-          email: email,
-          createdAcount: new Date(),
-        })
-          .then(() => {
-            const dataDoc = {
-              uid: data.user.uid,
-              name: name,
-              email: email,
-              createdAcount: new Date(),
-            };
-            setUser(dataDoc);
-            storageUser(dataDoc);
-            setLoadingLogin(false);
-            navigate("/home");
-          })
-          .catch((er) => {
-            console.log(er);
-            setLoadingLogin(false);
-          });
+        await handleAddDocUser(data, name);
       })
       .catch((er) => {
         setLoadingLogin(false);
