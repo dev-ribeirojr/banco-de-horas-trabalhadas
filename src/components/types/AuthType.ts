@@ -1,5 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { Dispatch, SetStateAction } from "react";
+import { DadosBanco } from "./HomeTypes";
 
 export type DataUserProps = {
   name: string;
@@ -13,6 +14,7 @@ export type User = {
   name: string;
   email: string;
   createdAcount: Timestamp | Date;
+  banco: DadosBanco[] | null;
 };
 
 export type UserSignInProps = {
@@ -27,6 +29,7 @@ export type UserSignUpProps = UserCreatedProps & UserSignInProps;
 
 export type AuthContextType = {
   user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
   signed: boolean;
   signIn: ({ email, password }: UserSignInProps) => Promise<void>;
   signUp: ({ name, email, password }: UserSignUpProps) => Promise<void>;

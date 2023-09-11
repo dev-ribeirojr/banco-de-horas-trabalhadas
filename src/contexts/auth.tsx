@@ -47,82 +47,35 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   async function handleAddDocUser(data: any, name: string) {
-    await setDoc(doc(db, "users", data.user.uid), {
-      name: name,
-      email: data.user.email,
-      createdAcount: new Date(),
-    })
-      .then(() => {
-        const dataDoc = {
-          uid: data.user.uid,
+    try {
+      await Promise.all([
+        setDoc(doc(db, "users", data.user.uid), {
           name: name,
           email: data.user.email,
           createdAcount: new Date(),
-        };
-        setUser(dataDoc);
-        storageUser(dataDoc);
-        setLoadingLogin(false);
-        navigate("/home");
-      })
-      .catch((er) => {
-        console.log(er);
-        setLoadingLogin(false);
-      });
-  }
+        }),
+        setDoc(doc(db, "banco-horas", data.user.uid), {
+          name: name,
+          createdAcount: new Date(),
+          banco: null,
+        }),
+      ]);
 
-  async function signUp({ name, email, password }: UserSignUpProps) {
-    setLoadingLogin(true);
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then(async (data) => {
-        await handleAddDocUser(data, name);
-      })
-      .catch((er) => {
-        setLoadingLogin(false);
-        if (er.code === "auth/email-already-in-use") {
-          setStatusMessage("Este email já está sendo utilizado!");
-          handleMessage();
-          return;
-        }
-        console.log(er);
-      });
-  }
-
-  async function signIn({ email, password }: UserSignInProps) {
-    setLoadingLogin(true);
-    await signInWithEmailAndPassword(auth, email, password)
-      .then(async (data) => {
-        const docRef = doc(db, "users", data.user.uid);
-        await getDoc(docRef).then((snap) => {
-          const daocData = snap.data();
-          const userDoc = {
-            uid: data.user.uid,
-            name: daocData?.name,
-            email: daocData?.email,
-            createdAcount: daocData?.createdAcount,
-          };
-          setUser(userDoc);
-          storageUser(userDoc);
-          setLoadingLogin(false);
-          navigate("/home");
-        });
-        setLoadingLogin(false);
-      })
-      .catch((er) => {
-        setLoadingLogin(false);
-        if (er.code === "auth/user-not-found") {
-          setStatusMessage("Este email não está cadastrado!");
-          handleMessage();
-          return;
-        }
-        if (er.code === "auth/wrong-password") {
-          setIncorrectPassword(true);
-          setStatusMessage("Senha incorreta!");
-          handleMessage();
-          return;
-        }
-
-        console.log(er);
-      });
+      const dataDoc = {
+        uid: data.user.uid,
+        name: name,
+        createdAcount: new Date(),
+        email: data.user.email,
+        banco: null,
+      };
+      setUser(dataDoc);
+      storageUser(dataDoc);
+      setLoadingLogin(false);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      setLoadingLogin(false);
+    }
   }
 
   function handleMessage() {
@@ -131,19 +84,78 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     }, 5000);
   }
 
+  async function signUp({ name, email, password }: UserSignUpProps) {
+    setLoadingLogin(true);
+    try {
+      const userData = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await handleAddDocUser(userData, name);
+    } catch (error: any) {
+      setLoadingLogin(false);
+      if (error.code === "auth/email-already-in-use") {
+        setStatusMessage("Este email já está sendo utilizado!");
+        handleMessage();
+        return;
+      }
+      console.log(error);
+    }
+  }
+
+  async function signIn({ email, password }: UserSignInProps) {
+    setLoadingLogin(true);
+    try {
+      const userData = await signInWithEmailAndPassword(auth, email, password);
+      const docUserRef = doc(db, "users", userData.user.uid);
+      const docBancoRef = doc(db, "users", userData.user.uid);
+
+      const [dataUser, dataBanco] = await Promise.all([
+        getDoc(docUserRef),
+        getDoc(docBancoRef),
+      ]);
+      const userDoc = {
+        uid: dataUser.id,
+        name: dataUser.data()?.name,
+        email: dataUser.data()?.email,
+        createdAcount: dataUser.data()?.createdAcount,
+        banco: dataBanco.data()?.banco,
+      };
+
+      setUser(userDoc);
+      storageUser(userDoc);
+      setLoadingLogin(false);
+      navigate("/home");
+    } catch (error: any) {
+      setLoadingLogin(false);
+      if (error.code === "auth/user-not-found") {
+        setStatusMessage("Este email não está cadastrado!");
+        handleMessage();
+        return;
+      }
+      if (error.code === "auth/wrong-password") {
+        setIncorrectPassword(true);
+        setStatusMessage("Senha incorreta!");
+        handleMessage();
+        return;
+      }
+      console.log(error);
+    }
+  }
+
   async function storageUser(data: DataUserProps) {
     localStorage.setItem(localStorageKey, JSON.stringify(data));
   }
 
   async function logOut() {
-    await signOut(auth)
-      .then(() => {
-        localStorage.removeItem(localStorageKey);
-        setUser(null);
-      })
-      .catch((er) => {
-        console.log(er);
-      });
+    try {
+      await signOut(auth);
+      localStorage.removeItem(localStorageKey);
+      setUser(null);
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   return (
@@ -151,6 +163,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         signed: !!user,
         user,
+        setUser,
         signUp,
         signIn,
         loadingLogin,
