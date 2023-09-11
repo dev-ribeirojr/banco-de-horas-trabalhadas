@@ -78,6 +78,7 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
           setTimeout(() => {
             setExistDate(false);
           }, 3000);
+
           return;
         }
         // dia não cadastrado ainda
@@ -100,30 +101,34 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
   return (
     <form onSubmit={handleSubmit(handleAdd)} className="form-add">
       <label>
-        Data
+        <p>Data</p>
         <input type="date" placeholder="18/20/16" {...register("date")} />
-        {errors.date && <p>X</p>}
-        {existDate && <p>data já utilizada</p>}
+        {errors.date && <p className="error">{errors.date.message}</p>}
+        {existDate && <p className="error">data já utilizada</p>}
       </label>
       <label>
-        Início
+        <p> Início</p>
         <input type="time" {...register("start")} />
-        {errors.start && <p>X</p>}
+        {errors.start && <p className="error">{errors.start.message}</p>}
       </label>
       <label>
-        Início do intervalo
+        <p> Início do intervalo</p>
         <input type="time" {...register("startInterval")} />
-        {errors.startInterval && <p>X</p>}
+        {errors.startInterval && (
+          <p className="error">{errors.startInterval.message}</p>
+        )}
       </label>
       <label>
-        Fim do intervalo
+        <p>Fim do intervalo</p>
         <input type="time" {...register("endInterval")} />
-        {errors.endInterval && <p>X</p>}
+        {errors.endInterval && (
+          <p className="error">{errors.endInterval.message}</p>
+        )}
       </label>
       <label>
-        Fim
+        <p>Fim</p>
         <input type="time" {...register("end")} />
-        {errors.end && <p>X</p>}
+        {errors.end && <p className="error">{errors.end.message}</p>}
       </label>
       <button type="button" onClick={() => reset()}>
         <FaDeleteLeft />

@@ -1,15 +1,17 @@
 .form-add {
   display: flex;
-  align-items: center;
   gap: 1em;
 }
 .form-add label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
   color: var(--pink-normal);
-
-  height: 75px;
+}
+.form-add label .error {
+  margin-top: 0.2em;
+  font-size: 0.9em;
+  font-weight: 420;
+  color: var(--red-normal);
+  max-width: 120px;
 }
 .form-add label input,
 .form-add button {
@@ -20,6 +22,8 @@
   color: var(--pink-normal);
   font-size: 1em;
   cursor: pointer;
+
+  align-self: flex-start;
 }
 
 .form-add label input[type="time"] {
@@ -27,11 +31,6 @@
 }
 .form-add label input[type="text"] {
   padding: 6px 8px;
-}
-.form-add label input:disabled {
-  background-color: var(--white-normal);
-  cursor: not-allowed;
-  width: 55px;
 }
 .form-add label input:disabled::placeholder {
   color: var(--pink-normal);
@@ -49,6 +48,7 @@
   justify-content: center;
 
   transition: all 0.3s;
+  margin-top: 0.7em;
 
   padding: 8px;
 }
