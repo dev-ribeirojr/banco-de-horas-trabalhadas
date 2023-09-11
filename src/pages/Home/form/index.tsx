@@ -9,9 +9,12 @@ import {
 import { months } from "../../../constants/months";
 import { calcularHoras } from "../../../functions/CalculoHors";
 import { FaDeleteLeft } from "react-icons/fa6";
+import { useState } from "react";
 
 export function FormHors({ dadosBanco, setDadosBanco }: any) {
   const { register, handleSubmit, errors, reset } = useHomeForm();
+
+  const [existDate, setExistDate] = useState<boolean>(false);
 
   function handleHoras(
     start: string,
@@ -71,6 +74,10 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
 
         if (existDay !== -1) {
           // dia ja cadastrado apenas informar
+          setExistDate(true);
+          setTimeout(() => {
+            setExistDate(false);
+          }, 3000);
           return;
         }
         // dia não cadastrado ainda
@@ -96,6 +103,7 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
         Data
         <input type="date" placeholder="18/20/16" {...register("date")} />
         {errors.date && <p>X</p>}
+        {existDate && <p>data já utilizada</p>}
       </label>
       <label>
         Início

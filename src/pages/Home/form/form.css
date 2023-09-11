@@ -8,6 +8,8 @@
   flex-direction: column;
   align-items: center;
   color: var(--pink-normal);
+
+  height: 75px;
 }
 .form-add label input,
 .form-add button {
@@ -37,7 +39,6 @@
 .form-add button {
   width: 35px;
   height: 35px;
-  align-self: flex-end;
   background-color: var(--white-normal);
   font-size: 1.5em;
 
