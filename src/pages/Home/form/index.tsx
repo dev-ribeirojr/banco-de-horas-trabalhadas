@@ -8,9 +8,10 @@ import {
 } from "../../../components/types/HomeTypes";
 import { months } from "../../../constants/months";
 import { calcularHoras } from "../../../functions/CalculoHors";
+import { FaDeleteLeft } from "react-icons/fa6";
 
 export function FormHors({ dadosBanco, setDadosBanco }: any) {
-  const { register, handleSubmit, errors } = useHomeForm();
+  const { register, handleSubmit, errors, reset } = useHomeForm();
 
   function handleHoras(
     start: string,
@@ -116,6 +117,9 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
         <input type="time" {...register("end")} />
         {errors.end && <p>X</p>}
       </label>
+      <button type="button" onClick={() => reset()}>
+        <FaDeleteLeft />
+      </button>
       <button type="submit">+</button>
     </form>
   );

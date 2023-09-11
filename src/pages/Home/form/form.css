@@ -48,6 +48,8 @@
   justify-content: center;
 
   transition: all 0.3s;
+
+  padding: 8px;
 }
 .form-add button:hover {
   background-color: var(--pink-normal);

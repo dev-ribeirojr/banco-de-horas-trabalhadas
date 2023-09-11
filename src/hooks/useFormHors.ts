@@ -7,6 +7,7 @@ export function useHomeForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<DateForm>({
     resolver: zodResolver(schemaFormHors),
@@ -16,5 +17,6 @@ export function useHomeForm() {
     register,
     handleSubmit,
     errors,
+    reset,
   };
 }
