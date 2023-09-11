@@ -2,7 +2,6 @@ import { Day } from "../components/types/HomeTypes";
 
 type DayArray = Day[];
 export function SomaHours(month: DayArray) {
-  console.log(month);
   let hoursTotal = 0;
   let minTotal = 0;
 

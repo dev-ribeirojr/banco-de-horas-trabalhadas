@@ -7,9 +7,9 @@ import { SomaHours } from "../../../functions/SomaHours";
 
 export function Table({ dados }: any) {
   // organizando a renderização das tabelas por ano, mes é dia
-  dados.sort((a: DadosBanco, b: DadosBanco) => Number(a.year) - Number(b.year));
+  dados.sort((a: DadosBanco, b: DadosBanco) => Number(b.year) - Number(a.year));
   dados.map((doc: DadosBanco) =>
-    doc.months.sort((a: Month, b: Month) => Number(a.id) - Number(b.id))
+    doc.months.sort((a: Month, b: Month) => Number(b.id) - Number(a.id))
   );
 
   dados.map((doc: DadosBanco) =>
