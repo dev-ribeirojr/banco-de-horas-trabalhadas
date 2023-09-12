@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { User } from "./Usertypes";
 
 export type Day = {
   date: string;
@@ -15,7 +16,7 @@ export type Month = {
   days: Day[];
 };
 
-export type DadosBanco = {
+export type Year = {
   year: string;
   months: Month[];
 };
@@ -28,9 +29,26 @@ export type DataForm = {
   end: string;
 };
 
-export type HandleAddProp = {
+type PropsFunction = {
+  user: User | null;
+  dadosBanco: Year[];
+  setUser: Dispatch<SetStateAction<User | null>>;
+  setSave: Dispatch<SetStateAction<boolean>>;
+  storageUser: (data: User) => void;
+};
+type UpdateDadosBanco = {
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setSucess: Dispatch<SetStateAction<boolean>>;
+};
+type AddProp = {
   data: DataForm;
-  dadosBanco: DadosBanco[];
-  setDadosBanco: Dispatch<SetStateAction<DadosBanco[]>>;
+  setDadosBanco: Dispatch<SetStateAction<Year[]>>;
   setExistDate: Dispatch<SetStateAction<boolean>>;
 };
+
+export type FormHoursProp = {
+  setSave: Dispatch<SetStateAction<boolean>>;
+};
+
+export type HandleAddProp = PropsFunction & AddProp;
+export type HandleUpdateDadosBancoProps = PropsFunction & UpdateDadosBanco;

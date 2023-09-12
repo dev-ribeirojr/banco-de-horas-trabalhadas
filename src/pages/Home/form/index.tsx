@@ -1,12 +1,15 @@
+import { useState, useContext } from "react";
 import "./form.css";
 import { useHomeForm } from "../../../hooks/useFormHors";
 import { FaDeleteLeft } from "react-icons/fa6";
-import { useState } from "react";
-import { DataForm } from "../../../components/types/HomeTypes";
+import { DataForm, FormHoursProp } from "../../../components/types/HomeTypes";
 import { handleAdd } from "../../../functions/HandleAddData";
+import { AuthContext } from "../../../contexts/auth";
 
-export function FormHors({ dadosBanco, setDadosBanco }: any) {
+export function FormHors({ setSave }: FormHoursProp) {
   const { register, handleSubmit, errors, reset } = useHomeForm();
+  const { user, setUser, storageUser, setDadosBanco, dadosBanco } =
+    useContext(AuthContext);
 
   const [existDate, setExistDate] = useState<boolean>(false);
 
@@ -16,6 +19,10 @@ export function FormHors({ dadosBanco, setDadosBanco }: any) {
       dadosBanco,
       setDadosBanco,
       setExistDate,
+      user,
+      setUser,
+      storageUser,
+      setSave,
     };
     handleAdd(dados);
   }

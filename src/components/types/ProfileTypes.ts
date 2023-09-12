@@ -12,4 +12,5 @@ export type UpdateProps = {
   setStatus: Dispatch<SetStateAction<ClassTypes>>;
   setRedirecting: Dispatch<SetStateAction<boolean>>;
   setStatusMessage: Dispatch<SetStateAction<string>>;
+  logOut: () => Promise<void>;
 };

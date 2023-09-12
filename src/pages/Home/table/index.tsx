@@ -1,18 +1,22 @@
 import "./table.css";
-import { DadosBanco, Day, Month } from "../../../components/types/HomeTypes";
+import { Year, Day, Month } from "../../../components/types/HomeTypes";
 import { MdEdit } from "react-icons/md";
 
 import { format, parseISO } from "date-fns";
 import { calculateHoursOfTheMonth } from "../../../functions/CalculateHoursOfTheMonth";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/auth";
 
-export function Table({ dados }: any) {
+export function Table() {
+  const { dadosBanco } = useContext(AuthContext);
+
   // organizando a renderização das tabelas por ano, mes é dia
-  dados.sort((a: DadosBanco, b: DadosBanco) => Number(b.year) - Number(a.year));
-  dados.map((doc: DadosBanco) =>
+  dadosBanco?.sort((a: Year, b: Year) => Number(b.year) - Number(a.year));
+  dadosBanco?.map((doc: Year) =>
     doc.months.sort((a: Month, b: Month) => Number(b.id) - Number(a.id))
   );
 
-  dados.map((doc: DadosBanco) =>
+  dadosBanco?.map((doc: Year) =>
     doc.months.map((month: Month) =>
       month.days.sort(
         (a: Day, b: Day) =>
@@ -24,7 +28,7 @@ export function Table({ dados }: any) {
 
   return (
     <section>
-      {dados.map((doc: DadosBanco) => (
+      {dadosBanco?.map((doc: Year) => (
         <section key={doc.year} className="area-table">
           <h1>Ano / "{doc.year}"</h1>
 

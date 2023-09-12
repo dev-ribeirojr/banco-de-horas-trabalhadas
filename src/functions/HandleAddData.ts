@@ -1,9 +1,4 @@
-import {
-  DadosBanco,
-  Month,
-  Day,
-  HandleAddProp,
-} from "../components/types/HomeTypes";
+import { Year, Month, Day, HandleAddProp } from "../components/types/HomeTypes";
 import { months } from "../constants/months";
 import { handleTimeOfDay } from "./HandleSomaHours";
 
@@ -12,12 +7,18 @@ export function handleAdd({
   dadosBanco,
   setDadosBanco,
   setExistDate,
+  user,
+  setUser,
+  storageUser,
+  setSave,
 }: HandleAddProp) {
   const { date, start, startInterval, endInterval, end } = data;
+
   const monthNumber = Number(date.slice(5, 7));
   const monthName = months[monthNumber - 1];
   const yearAdd = date.slice(0, 4);
 
+  const userData = user;
   const list = dadosBanco;
 
   const day: Day = {
@@ -34,9 +35,7 @@ export function handleAdd({
     days: [day],
   };
 
-  const existYear = dadosBanco.findIndex(
-    (doc: DadosBanco) => doc.year === yearAdd
-  );
+  const existYear = dadosBanco.findIndex((doc: Year) => doc.year === yearAdd);
   if (existYear !== -1) {
     // ano cadastrado
     const indexYear = existYear;
@@ -74,5 +73,14 @@ export function handleAdd({
     });
   }
 
+  if (userData) {
+    userData.banco! = list;
+    userData.save! = true;
+
+    storageUser(userData);
+  }
+
+  setUser(userData);
   setDadosBanco([...list]);
+  setSave(true);
 }

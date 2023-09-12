@@ -12,3 +12,14 @@
   padding: 4px 4em;
   box-shadow: inset 0 0 4px #df4f6e7e;
 }
+.home .save-button {
+  background-color: var(--pink-normal);
+  padding: 8px 24px;
+  color: var(--white-normal);
+  font-weight: 450;
+  font-size: 1em;
+  border-radius: 2em;
+}
+.home .save-button:hover {
+  background-color: var(--pink-dark);
+}

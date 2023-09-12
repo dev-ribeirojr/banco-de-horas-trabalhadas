@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LoadingCircle } from "../../../components/loading";
 import { PasswordTypes } from "../../../components/types/ProfileTypes";
 import { useUpdatePasswordForm } from "../../../hooks/useUpdatePasswordForm";
@@ -6,9 +6,11 @@ import { useUpdatePasswordForm } from "../../../hooks/useUpdatePasswordForm";
 import StatusText from "../../../components/StatusMessage";
 import { handleUpdatePassword } from "../../../functions/HandleUpdatePassword";
 import { ClassTypes } from "../../../components/types/ClassTypes";
+import { AuthContext } from "../../../contexts/auth";
 
 export function FormEditPassword() {
   const { register, handleSubmit, errors } = useUpdatePasswordForm();
+  const { logOut } = useContext(AuthContext);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string>("");
@@ -22,6 +24,7 @@ export function FormEditPassword() {
       setStatus,
       setRedirecting,
       setStatusMessage,
+      logOut,
     };
     await handleUpdatePassword(props);
   }

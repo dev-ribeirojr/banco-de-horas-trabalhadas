@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  AuthContextType,
-  DataUserProps,
-  User,
-  UserSignInProps,
-  UserSignUpProps,
-} from "../components/types/AuthType";
+import { AuthContextType } from "../components/types/AuthType";
 
 import { ReactNode, createContext } from "react";
 import { auth, db } from "../services/firebaseConection";
@@ -18,6 +12,8 @@ import { setDoc, doc, getDoc } from "firebase/firestore";
 
 import { useNavigate } from "react-router-dom";
 import { localStorageKey } from "../constants/localStorageKey";
+import { Year } from "../components/types/HomeTypes";
+import { User, UserSignIn, UserSignUp } from "../components/types/Usertypes";
 
 export const AuthContext = createContext({} as AuthContextType);
 
@@ -26,7 +22,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loadingUSer, setLoadingUser] = useState<boolean>(true);
   const [incorrectPassword, setIncorrectPassword] = useState<boolean>(false);
-
+  const [dadosBanco, setDadosBanco] = useState<Year[]>([]);
   //messagen de erro
   const [statusMessage, setStatusMessage] = useState<string>("");
 
@@ -37,6 +33,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       const userData = localStorage.getItem(localStorageKey);
       if (userData) {
         const userSigned = JSON.parse(userData);
+        setDadosBanco(userSigned.banco!);
         setUser(userSigned);
         setLoadingUser(false);
       }
@@ -56,7 +53,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         setDoc(doc(db, "banco-horas", data.user.uid), {
           name: name,
           createdAcount: new Date(),
-          banco: null,
+          banco: [],
         }),
       ]);
 
@@ -65,7 +62,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         name: name,
         createdAcount: new Date(),
         email: data.user.email,
-        banco: null,
+        banco: [],
+        save: false,
       };
       setUser(dataDoc);
       storageUser(dataDoc);
@@ -83,7 +81,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     }, 5000);
   }
 
-  async function signUp({ name, email, password }: UserSignUpProps) {
+  async function signUp({ name, email, password }: UserSignUp) {
     setLoadingLogin(true);
     try {
       const userData = await createUserWithEmailAndPassword(
@@ -103,25 +101,28 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function signIn({ email, password }: UserSignInProps) {
+  async function signIn({ email, password }: UserSignIn) {
     setLoadingLogin(true);
     try {
       const userData = await signInWithEmailAndPassword(auth, email, password);
       const docUserRef = doc(db, "users", userData.user.uid);
-      const docBancoRef = doc(db, "users", userData.user.uid);
+      const docBancoRef = doc(db, "banco-horas", userData.user.uid);
 
       const [dataUser, dataBanco] = await Promise.all([
         getDoc(docUserRef),
         getDoc(docBancoRef),
       ]);
+
       const userDoc = {
         uid: dataUser.id,
         name: dataUser.data()?.name,
         email: dataUser.data()?.email,
         createdAcount: dataUser.data()?.createdAcount,
         banco: dataBanco.data()?.banco,
+        save: false,
       };
 
+      setDadosBanco(userDoc.banco);
       setUser(userDoc);
       storageUser(userDoc);
       setLoadingLogin(false);
@@ -143,7 +144,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function storageUser(data: DataUserProps) {
+  async function storageUser(data: User) {
     localStorage.setItem(localStorageKey, JSON.stringify(data));
   }
 
@@ -171,6 +172,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         setIncorrectPassword,
         loadingUSer,
         logOut,
+        storageUser,
+        setDadosBanco,
+        dadosBanco,
       }}
     >
       {children}

@@ -5,7 +5,6 @@ import {
   updatePassword,
 } from "firebase/auth";
 import { auth } from "../services/firebaseConection";
-import { handleRedirect } from "./HandleRedirectUser";
 import { UpdateProps } from "../components/types/ProfileTypes";
 
 export async function handleUpdatePassword({
@@ -14,6 +13,7 @@ export async function handleUpdatePassword({
   setStatus,
   setRedirecting,
   setStatusMessage,
+  logOut,
 }: UpdateProps) {
   setLoading(true);
   const { currentPassword, newPassword } = data;
@@ -37,7 +37,11 @@ export async function handleUpdatePassword({
 
       setRedirecting(true);
       renderMessage(setStatusMessage);
-      handleRedirect(setRedirecting);
+
+      setTimeout(() => {
+        logOut();
+        setRedirecting(false);
+      }, 4000);
     } catch (error: any) {
       setLoading(false);
       setRedirecting(false);
