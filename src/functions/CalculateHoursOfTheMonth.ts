@@ -1,7 +1,5 @@
 import { Day } from "../components/types/HomeTypes";
-
-type DayArray = Day[];
-export function SomaHours(month: DayArray) {
+export function calculateHoursOfTheMonth(month: Day[]) {
   let hoursTotal = 0;
   let minTotal = 0;
 

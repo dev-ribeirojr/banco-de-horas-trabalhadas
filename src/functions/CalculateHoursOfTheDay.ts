@@ -1,4 +1,7 @@
-export function calcularHoras(primaryValue: string, secundaryValue: string) {
+export function calculateHoursOfTheDay(
+  primaryValue: string,
+  secundaryValue: string
+) {
   let primaryValueHours = Number(primaryValue.slice(0, 2));
   let primaryValueMin = Number(primaryValue.slice(3, 5));
 

@@ -1,5 +1,5 @@
-import { Timestamp } from "firebase/firestore";
 import { Dispatch, SetStateAction } from "react";
+import { Timestamp } from "firebase/firestore";
 import { DadosBanco } from "./HomeTypes";
 
 export type DataUserProps = {

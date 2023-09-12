@@ -3,7 +3,7 @@ import { DadosBanco, Day, Month } from "../../../components/types/HomeTypes";
 import { MdEdit } from "react-icons/md";
 
 import { format, parseISO } from "date-fns";
-import { SomaHours } from "../../../functions/SomaHours";
+import { calculateHoursOfTheMonth } from "../../../functions/CalculateHoursOfTheMonth";
 
 export function Table({ dados }: any) {
   // organizando a renderização das tabelas por ano, mes é dia
@@ -65,7 +65,7 @@ export function Table({ dados }: any) {
                 <tr>
                   <td colSpan={4}></td>
                   <td>total</td>
-                  <td>{SomaHours(month.days)}</td>
+                  <td>{calculateHoursOfTheMonth(month.days)}</td>
                   <td></td>
                 </tr>
               </tfoot>

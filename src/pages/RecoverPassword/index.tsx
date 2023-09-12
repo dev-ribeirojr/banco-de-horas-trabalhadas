@@ -4,13 +4,11 @@ import "./recoverPassword.css";
 import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 
-import { auth } from "../../services/firebaseConection";
-import { sendPasswordResetEmail } from "firebase/auth";
-
 import { LoadingCircle } from "../../components/loading";
 import { FormProps } from "../../components/types/RecoverTypes";
 import { useRecoverPasswordForm } from "../../hooks/useRecoverPasswordForm";
 import Logo from "../../assets/logo-banco.png";
+import { handleRecoverPassword } from "../../functions/HandleRecoverPassword";
 
 export default function RecoverPassword() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,36 +20,15 @@ export default function RecoverPassword() {
 
   const { register, handleSubmit, errors } = useRecoverPasswordForm();
 
-  function handleRecoverStatus() {
-    setRecoverStatus(true);
-    setTimeout(() => {
-      setRecoverStatus(false);
-    }, 5000);
-  }
-
-  async function handleForm(data: FormProps) {
-    setLoading(true);
-    await sendPasswordResetEmail(auth, data.email)
-      .then(() => {
-        setLoading(false);
-        setClassStatus("info-sucess");
-        setMessageStatus("Link de recuperação enviado!");
-        handleRecoverStatus();
-      })
-      .catch((er) => {
-        setClassStatus("info-error");
-        //usuário não cadastrado
-        if (er.code === "auth/user-not-found") {
-          setMessageStatus("Este email não existe em nosso sistema!");
-          handleRecoverStatus();
-          setLoading(false);
-          return;
-        }
-        setMessageStatus("Error ao enviar o link!");
-        handleRecoverStatus();
-        setLoading(false);
-        console.log(er);
-      });
+  async function onSubmit(data: FormProps) {
+    const props = {
+      data,
+      setLoading,
+      setRecoverStatus,
+      setClassStatus,
+      setMessageStatus,
+    };
+    handleRecoverPassword(props);
   }
 
   return (
@@ -72,7 +49,7 @@ export default function RecoverPassword() {
         </p>
         <form
           className="login-form"
-          onSubmit={handleSubmit(handleForm)}
+          onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
         >
           <label className="inputText">

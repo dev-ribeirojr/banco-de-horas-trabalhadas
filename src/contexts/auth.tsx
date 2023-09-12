@@ -17,12 +17,11 @@ import {
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
 import { useNavigate } from "react-router-dom";
+import { localStorageKey } from "../constants/localStorageKey";
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  const localStorageKey = "@dataUserBancoHoras";
-
   const [loadingLogin, setLoadingLogin] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const [loadingUSer, setLoadingUser] = useState<boolean>(true);
