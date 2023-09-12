@@ -5,10 +5,12 @@ import Logo from "../../assets/logo-banco.png";
 
 import { FormLogin } from "./form/index.jsx";
 import { AuthContext } from "../../contexts/auth.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginAndRegister() {
-  const { incorrectPassword, setIncorrectPassword } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { incorrectPassword, setIncorrectPassword, user } =
+    useContext(AuthContext);
 
   useEffect(() => {
     function forgotPassword() {
@@ -16,6 +18,13 @@ export default function LoginAndRegister() {
     }
     forgotPassword();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+    return () => {};
+  }, [user]);
 
   return (
     <div className="container">
