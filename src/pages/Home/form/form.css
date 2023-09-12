@@ -32,6 +32,10 @@
 .form-add label input[type="text"] {
   padding: 6px 8px;
 }
+.form-add label input:disabled {
+  background-color: var(--white-normal);
+  cursor: not-allowed;
+}
 .form-add label input:disabled::placeholder {
   color: var(--pink-normal);
 }

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { MdEmail, MdLock } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
@@ -8,14 +8,19 @@ import { LoadingCircle } from "../../../components/loading";
 
 // remover quando componentizar os inputs
 import "../../../components/Input/input.css";
-import { UserSignUpProps } from "../../../components/types/AuthType";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
+import { UserSignUp } from "../../../components/types/UserTypes";
 
 export function FormRegister() {
-  const { signUp, loadingLogin, statusMessage } = useContext(AuthContext);
+  const { signUp, loadingLogin, statusMessage, setStatusMessage } =
+    useContext(AuthContext);
   const { register, handleSubmit, errors } = useRegisterForm();
 
-  async function handleSubmitForm(data: UserSignUpProps) {
+  useEffect(() => {
+    setStatusMessage("");
+  }, []);
+
+  async function handleSubmitForm(data: UserSignUp) {
     signUp(data);
   }
 

@@ -58,7 +58,7 @@ export default function Home() {
             />
           </div>
         )}
-        <Table />
+        <Table setSave={setSave} />
       </section>
     </>
   );

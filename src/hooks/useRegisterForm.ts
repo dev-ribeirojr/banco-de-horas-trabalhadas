@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import { UserSignUpProps } from "../components/types/AuthType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaRegister } from "../schema/RegisterSchema";
+import { UserSignUp } from "../components/types/UserTypes";
 
 export function useRegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSignUpProps>({
+  } = useForm<UserSignUp>({
     mode: "all",
     reValidateMode: "onChange",
     resolver: zodResolver(schemaRegister),

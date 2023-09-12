@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PasswordsProps } from "../components/types/EditPasswordTyp";
+import { PasswordsProps } from "../components/types/EditPasswordTypes";
 import { schemaUpdatePassword } from "../schema/UpdatePasswordSchema";
 
 export function useUpdatePasswordForm() {

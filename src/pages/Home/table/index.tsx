@@ -4,11 +4,13 @@ import { MdEdit } from "react-icons/md";
 
 import { format, parseISO } from "date-fns";
 import { calculateHoursOfTheMonth } from "../../../functions/CalculateHoursOfTheMonth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/auth";
+import { Edit } from "../edit";
 
-export function Table() {
+export function Table({ setSave }: any) {
   const { dadosBanco } = useContext(AuthContext);
+  const [dataDay, setDataDay] = useState<any | null>(null);
 
   // organizando a renderização das tabelas por ano, mes é dia
   dadosBanco?.sort((a: Year, b: Year) => Number(b.year) - Number(a.year));
@@ -26,8 +28,13 @@ export function Table() {
     )
   );
 
+  function handleEdit(day: Day, month: string, year: string) {
+    setDataDay({ day, month, year, setDataDay, setSave });
+  }
+
   return (
     <section>
+      {dataDay !== null && <Edit dataDay={dataDay} />}
       {dadosBanco?.map((doc: Year) => (
         <section key={doc.year} className="area-table">
           <h1>Ano / "{doc.year}"</h1>
@@ -58,7 +65,9 @@ export function Table() {
                     <td>{day.end}</td>
                     <td>{day.total}</td>
                     <td>
-                      <button>
+                      <button
+                        onClick={() => handleEdit(day, month.id, doc.year)}
+                      >
                         <MdEdit />
                       </button>
                     </td>

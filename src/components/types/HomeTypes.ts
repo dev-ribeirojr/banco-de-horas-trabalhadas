@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { User } from "./Usertypes";
+import { User } from "./UserTypes";
 
 export type Day = {
   date: string;

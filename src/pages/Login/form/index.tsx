@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { MdEmail, MdLock } from "react-icons/md";
 
@@ -8,15 +8,20 @@ import { LoadingCircle } from "../../../components/loading";
 // remover quando componentizar os inputs
 import "../../../components/Input/input.css";
 
-import { UserSignInProps } from "../../../components/types/AuthType";
 import { useLoginForm } from "../../../hooks/useLoginForm";
 import StatusText from "../../../components/StatusMessage";
+import { UserSignIn } from "../../../components/types/UserTypes";
 
 export function FormLogin() {
-  const { signIn, loadingLogin, statusMessage } = useContext(AuthContext);
+  const { signIn, loadingLogin, statusMessage, setStatusMessage } =
+    useContext(AuthContext);
   const { register, handleSubmit, errors } = useLoginForm();
 
-  async function handleSubmitForm(data: UserSignInProps) {
+  useEffect(() => {
+    setStatusMessage("");
+  }, []);
+
+  async function handleSubmitForm(data: UserSignIn) {
     signIn(data);
   }
   return (

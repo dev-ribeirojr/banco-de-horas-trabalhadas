@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Year } from "./HomeTypes";
-import { User, UserSignIn, UserSignUp } from "./Usertypes";
+import { User, UserSignIn, UserSignUp } from "./UserTypes";
 
 export type AuthContextType = {
   user: User | null;
@@ -17,4 +17,5 @@ export type AuthContextType = {
   storageUser: (data: User) => void;
   setDadosBanco: Dispatch<SetStateAction<Year[]>>;
   dadosBanco: Year[];
+  setStatusMessage: Dispatch<SetStateAction<string>>;
 };

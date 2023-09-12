@@ -13,7 +13,7 @@ import { setDoc, doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { localStorageKey } from "../constants/localStorageKey";
 import { Year } from "../components/types/HomeTypes";
-import { User, UserSignIn, UserSignUp } from "../components/types/Usertypes";
+import { User, UserSignIn, UserSignUp } from "../components/types/UserTypes";
 
 export const AuthContext = createContext({} as AuthContextType);
 
@@ -175,6 +175,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         storageUser,
         setDadosBanco,
         dadosBanco,
+        setStatusMessage,
       }}
     >
       {children}
