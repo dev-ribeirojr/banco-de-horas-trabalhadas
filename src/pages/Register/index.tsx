@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormRegister } from "./form";
 import Logo from "../../assets/logo-banco.png";
+import { AuthContext } from "../../contexts/auth";
+import { useContext, useEffect } from "react";
 
 export default function Register() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+    return () => {};
+  }, [user]);
   return (
     <div className="container">
       <section className="login">
