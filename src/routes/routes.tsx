@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Private from "./Private";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
+import NotFound from "../pages/NotFound";
 
 export default function RoutesApp() {
   return (
@@ -30,9 +31,7 @@ export default function RoutesApp() {
           </Private>
         }
       />
-      <Route path="*" element={<Home />} />
-
-      {/* criar página de not found */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
