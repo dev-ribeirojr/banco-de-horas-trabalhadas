@@ -1,0 +1,60 @@
+.suport {
+  flex-direction: column;
+}
+.suport h1 {
+  font-size: 2.2em;
+  color: var(--pink-normal);
+  margin: 0.5em 0 1em 0;
+}
+.suport form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.area-inputs-suport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  max-width: 450px;
+}
+
+.suport form div input:disabled {
+  background: var(--white-normal);
+  cursor: not-allowed;
+}
+
+.suport form textarea::placeholder {
+  color: var(--pink-normal);
+  opacity: 0.8;
+}
+.suport form textarea {
+  padding: 8px 16px;
+
+  border-radius: 8px;
+  resize: none;
+  height: 150px;
+}
+.suport form textarea {
+  font-weight: 500;
+  font-size: 1em;
+  color: var(--pink-normal);
+  box-shadow: inset 0 0 4px #df4f6e7e;
+  border: 1px solid var(--border-input);
+}
+.suport .area-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 0.5em;
+}
+.suport .area-buttons button {
+  padding: 8px 16px;
+  background-color: var(--pink-normal);
+  color: var(--white-normal);
+  border-radius: 2em;
+  font-weight: 500;
+}
+.suport .area-buttons button:hover {
+  background-color: var(--pink-dark);
+}

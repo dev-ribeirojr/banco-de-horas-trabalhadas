@@ -8,6 +8,7 @@ import Private from "./Private";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
+import Suport from "../pages/Suport";
 
 export default function RoutesApp() {
   return (
@@ -31,6 +32,16 @@ export default function RoutesApp() {
           </Private>
         }
       />
+
+      <Route
+        path="/suport"
+        element={
+          <Private>
+            <Suport />
+          </Private>
+        }
+      />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

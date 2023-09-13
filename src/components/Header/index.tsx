@@ -21,7 +21,7 @@ export function Header() {
           <p className="text-header">início</p>
           <FaHome size={25} />
         </Link>
-        <Link to={"/support"}>
+        <Link to={"/suport"}>
           <p className="text-header">suporte</p>
           <BiSupport size={25} />
         </Link>
