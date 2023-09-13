@@ -30,6 +30,7 @@ export default function RoutesApp() {
           </Private>
         }
       />
+      <Route path="*" element={<Home />} />
 
       {/* criar página de not found */}
     </Routes>

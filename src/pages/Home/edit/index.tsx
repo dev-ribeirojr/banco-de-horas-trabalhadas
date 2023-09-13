@@ -1,13 +1,25 @@
-import "./edit.css";
 import { useRef, useContext } from "react";
+import "./edit.css";
+
 import { MdEdit } from "react-icons/md";
 import { AuthContext } from "../../../contexts/auth";
 import { handleDeleteDay } from "../../../functions/HandleDeleteDay";
+import { handleEditDay } from "../../../functions/HandleEditDay";
+import { useEditDayForm } from "../../../hooks/useEditDayForm";
+import { DataDay, DataFormEdit } from "../../../components/types/HomeTypes";
 
-export function Edit({ dataDay }: any) {
+export function Edit({ day, month, year, setDataDay, setSave }: DataDay) {
+  const { register, handleSubmit } = useEditDayForm({
+    date: day.date,
+    start: day.start,
+    startInterval: day.startInterval,
+    endInterval: day.endInterval,
+    end: day.end,
+  });
+
   const { dadosBanco, setDadosBanco, storageUser, user, setUser } =
     useContext(AuthContext);
-  const { day, month, year, setDataDay, setSave } = dataDay;
+
   const containerRef: any = useRef();
 
   function handleClose(e: any) {
@@ -16,19 +28,24 @@ export function Edit({ dataDay }: any) {
     }
   }
 
+  const props = {
+    day,
+    month,
+    year,
+    dadosBanco,
+    user,
+    setDadosBanco,
+    storageUser,
+    setUser,
+    setDataDay,
+    setSave,
+  };
+
+  function onSubmit(data: DataFormEdit) {
+    handleEditDay({ data, ...props });
+  }
+
   function handleDelete() {
-    const props = {
-      day,
-      month,
-      year,
-      setDataDay,
-      dadosBanco,
-      user,
-      setDadosBanco,
-      storageUser,
-      setUser,
-      setSave,
-    };
     handleDeleteDay(props);
   }
 
@@ -40,26 +57,26 @@ export function Edit({ dataDay }: any) {
     >
       <section className="area-edit">
         <h1 className="title">Editando...</h1>
-        <form className="form-add">
+        <form className="form-add" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <p>Data</p>
-            <input type="date" value={day.date} disabled />
+            <input type="date" disabled {...register("dateEdit")} />
           </label>
           <label>
             <p> Início</p>
-            <input type="time" value={day.start} disabled />
+            <input type="time" {...register("startEdit")} />
           </label>
           <label>
             <p> Início do intervalo</p>
-            <input type="time" value={day.startInterval} disabled />
+            <input type="time" {...register("startIntervalEdit")} />
           </label>
           <label>
             <p>Fim do intervalo</p>
-            <input type="time" value={day.endInterval} disabled />
+            <input type="time" {...register("endIntervalEdit")} />
           </label>
           <label>
             <p>Fim</p>
-            <input type="time" value={day.end} disabled />
+            <input type="time" {...register("endEdit")} />
           </label>
           <button type="submit">
             <MdEdit />

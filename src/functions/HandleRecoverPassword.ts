@@ -1,5 +1,5 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import { RecoverPasswordProps } from "../components/types/RecoverTypes";
+import { RecoverPassword } from "../components/types/RecoverTypes";
 import { auth } from "../services/firebaseConection";
 import { Dispatch, SetStateAction } from "react";
 
@@ -18,7 +18,7 @@ export async function handleRecoverPassword({
   setLoading,
   setMessageStatus,
   setRecoverStatus,
-}: RecoverPasswordProps) {
+}: RecoverPassword) {
   const { email } = data;
   setLoading(true);
 

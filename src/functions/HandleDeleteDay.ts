@@ -1,3 +1,5 @@
+import { HandleDeleDayProps } from "../components/types/HomeTypes";
+
 export function handleDeleteDay({
   day,
   month,
@@ -9,7 +11,7 @@ export function handleDeleteDay({
   setUser,
   storageUser,
   setSave,
-}: any) {
+}: HandleDeleDayProps) {
   const dataUser = user!;
   const data = dadosBanco;
   const indexYear = data.findIndex((ano: any) => ano.year === year);

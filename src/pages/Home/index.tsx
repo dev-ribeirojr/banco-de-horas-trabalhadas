@@ -1,7 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { FormHors } from "./form";
 import "./home.css";
+
+import { FormHors } from "./form";
 import { Table } from "./table";
+
 import { Header } from "../../components/Header";
 import { handleUpdateDadosBanco } from "../../functions/HandleUpdateDadosBaco";
 import { AuthContext } from "../../contexts/auth";
@@ -25,11 +27,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    function saveOn() {
-      setSave(user?.save!);
-    }
     if (user) {
-      saveOn();
+      setSave(user?.save);
     }
   }, []);
 
@@ -39,7 +38,6 @@ export default function Home() {
       <section className="home">
         <h1 className="title">Banco de Horas</h1>
         <FormHors setSave={setSave} />
-
         {save && (
           <button
             type="button"

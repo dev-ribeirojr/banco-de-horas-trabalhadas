@@ -4,8 +4,10 @@ import { Year } from "./HomeTypes";
 type UserName = {
   name: string;
 };
-export type UserSignIn = {
+export type Email = {
   email: string;
+};
+export type UserSignIn = Email & {
   password: string;
 };
 export type UserSignUp = UserName & UserSignIn;

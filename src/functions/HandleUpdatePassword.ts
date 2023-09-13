@@ -5,7 +5,7 @@ import {
   updatePassword,
 } from "firebase/auth";
 import { auth } from "../services/firebaseConection";
-import { UpdateProps } from "../components/types/ProfileTypes";
+import { UpdateProfile } from "../components/types/ProfileTypes";
 
 export async function handleUpdatePassword({
   data,
@@ -14,7 +14,7 @@ export async function handleUpdatePassword({
   setRedirecting,
   setStatusMessage,
   logOut,
-}: UpdateProps) {
+}: UpdateProfile) {
   setLoading(true);
   const { currentPassword, newPassword } = data;
 

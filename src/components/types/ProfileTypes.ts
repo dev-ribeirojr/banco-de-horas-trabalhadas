@@ -1,15 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
-import { ClassTypes } from "./ClassTypes";
+import { ClassMessage } from "./ClassTypes";
 
-export type PasswordTypes = {
+export type Password = {
   newPassword: string;
   currentPassword: string;
 };
 
-export type UpdateProps = {
-  data: PasswordTypes;
+export type PasswordUpdateProfile = Password & {
+  confirmNewPassword: string;
+};
+
+export type UpdateProfile = {
+  data: Password;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setStatus: Dispatch<SetStateAction<ClassTypes>>;
+  setStatus: Dispatch<SetStateAction<ClassMessage>>;
   setRedirecting: Dispatch<SetStateAction<boolean>>;
   setStatusMessage: Dispatch<SetStateAction<string>>;
   logOut: () => Promise<void>;

@@ -1,16 +1,24 @@
-import "./table.css";
-import { Year, Day, Month } from "../../../components/types/HomeTypes";
-import { MdEdit } from "react-icons/md";
-
-import { format, parseISO } from "date-fns";
-import { calculateHoursOfTheMonth } from "../../../functions/CalculateHoursOfTheMonth";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../contexts/auth";
+import "./table.css";
+import { format, parseISO } from "date-fns";
+
+import {
+  Year,
+  Day,
+  Month,
+  Save,
+  DataDay,
+} from "../../../components/types/HomeTypes";
+
+import { MdEdit } from "react-icons/md";
 import { Edit } from "../edit";
 
-export function Table({ setSave }: any) {
+import { calculateHoursOfTheMonth } from "../../../functions/CalculateHoursOfTheMonth";
+import { AuthContext } from "../../../contexts/auth";
+
+export function Table({ setSave }: Save) {
   const { dadosBanco } = useContext(AuthContext);
-  const [dataDay, setDataDay] = useState<any | null>(null);
+  const [dataDay, setDataDay] = useState<DataDay | null>(null);
 
   // organizando a renderização das tabelas por ano, mes é dia
   dadosBanco?.sort((a: Year, b: Year) => Number(b.year) - Number(a.year));
@@ -36,14 +44,14 @@ export function Table({ setSave }: any) {
     <section>
       {dataDay !== null && <Edit dataDay={dataDay} />}
       {dadosBanco?.map((doc: Year) => (
-        <section key={doc.year} className="area-table">
-          <h1>Ano / "{doc.year}"</h1>
+        <section key={doc?.year} className="area-table">
+          <h1>Ano / "{doc?.year}"</h1>
 
-          {doc.months.map((month) => (
-            <table key={month.id} className="table">
+          {doc?.months.map((month) => (
+            <table key={month?.id} className="table">
               <thead>
                 <tr className="trtitle">
-                  <th colSpan={7}>{month.month}</th>
+                  <th colSpan={7}>{month?.month}</th>
                 </tr>
                 <tr>
                   <th>data</th>
@@ -58,7 +66,7 @@ export function Table({ setSave }: any) {
               <tbody>
                 {month.days.map((day) => (
                   <tr key={day.date}>
-                    <td>{format(parseISO(day.date), "dd/MM/yyyy")}</td>
+                    <td>{format(parseISO(day?.date), "dd/MM/yyyy")}</td>
                     <td>{day.start}</td>
                     <td className="td-interval">{day.startInterval}</td>
                     <td className="td-interval">{day.endInterval}</td>

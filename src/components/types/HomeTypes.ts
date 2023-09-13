@@ -28,6 +28,13 @@ export type DataForm = {
   endInterval: string;
   end: string;
 };
+export type DataFormEdit = {
+  dateEdit: string;
+  startEdit: string;
+  startIntervalEdit: string;
+  endIntervalEdit: string;
+  endEdit: string;
+};
 
 type PropsFunction = {
   user: User | null;
@@ -52,3 +59,34 @@ export type FormHoursProp = {
 
 export type HandleAddProp = PropsFunction & AddProp;
 export type HandleUpdateDadosBancoProps = PropsFunction & UpdateDadosBanco;
+
+/* ------- Type utilizados no component Table ---------- */
+
+export type Save = {
+  setSave: Dispatch<SetStateAction<boolean>>;
+};
+
+export type DataDay = {
+  day: Day;
+  month: string;
+  year: string;
+  setDataDay: Dispatch<SetStateAction<DataDay | null>>;
+  setSave: Dispatch<SetStateAction<boolean>>;
+};
+
+export type HandleDeleDayProps = {
+  day: Day;
+  month: string;
+  year: string;
+  setDataDay: Dispatch<SetStateAction<DataDay | null>>;
+  dadosBanco: Year[];
+  setDadosBanco: Dispatch<SetStateAction<Year[]>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
+  storageUser: (data: User) => void;
+  setSave: Dispatch<SetStateAction<boolean>>;
+};
+
+export type HandleEditDayProps = HandleDeleDayProps & {
+  data: DataFormEdit;
+};

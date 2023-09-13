@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 
 import { LoadingCircle } from "../../components/loading";
-import { FormProps } from "../../components/types/RecoverTypes";
 import { useRecoverPasswordForm } from "../../hooks/useRecoverPasswordForm";
 import Logo from "../../assets/logo-banco.png";
 import { handleRecoverPassword } from "../../functions/HandleRecoverPassword";
+import { Email } from "../../components/types/UserTypes";
 
 export default function RecoverPassword() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,7 +20,7 @@ export default function RecoverPassword() {
 
   const { register, handleSubmit, errors } = useRecoverPasswordForm();
 
-  async function onSubmit(data: FormProps) {
+  async function onSubmit(data: Email) {
     const props = {
       data,
       setLoading,

@@ -1,10 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
+import { Email } from "./UserTypes";
 
-export type FormProps = {
-  email: string;
-};
-export type RecoverPasswordProps = {
-  data: FormProps;
+export type RecoverPassword = {
+  data: Email;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setRecoverStatus: Dispatch<SetStateAction<boolean>>;
   setClassStatus: Dispatch<SetStateAction<string>>;

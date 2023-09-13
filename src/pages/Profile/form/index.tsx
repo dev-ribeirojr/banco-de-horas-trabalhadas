@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { LoadingCircle } from "../../../components/loading";
-import { PasswordTypes } from "../../../components/types/ProfileTypes";
+import { Password } from "../../../components/types/ProfileTypes";
 import { useUpdatePasswordForm } from "../../../hooks/useUpdatePasswordForm";
 
 import StatusText from "../../../components/StatusMessage";
 import { handleUpdatePassword } from "../../../functions/HandleUpdatePassword";
-import { ClassTypes } from "../../../components/types/ClassTypes";
+import { ClassMessage } from "../../../components/types/ClassTypes";
 import { AuthContext } from "../../../contexts/auth";
 
 export function FormEditPassword() {
@@ -15,9 +15,9 @@ export function FormEditPassword() {
   const [loading, setLoading] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string>("");
   const [redirecting, setRedirecting] = useState<boolean>(false);
-  const [status, setStatus] = useState<ClassTypes>({ status: "info-error" });
+  const [status, setStatus] = useState<ClassMessage>({ status: "info-error" });
 
-  async function onSubmit(data: PasswordTypes) {
+  async function onSubmit(data: Password) {
     const props = {
       data,
       setLoading,
