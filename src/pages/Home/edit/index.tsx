@@ -8,7 +8,9 @@ import { handleEditDay } from "../../../functions/HandleEditDay";
 import { useEditDayForm } from "../../../hooks/useEditDayForm";
 import { DataDay, DataFormEdit } from "../../../components/types/HomeTypes";
 
-export function Edit({ day, month, year, setDataDay, setSave }: DataDay) {
+export function Edit({ data, setDataDay, setSave }: DataDay) {
+  const { day, month, year } = data;
+
   const { register, handleSubmit } = useEditDayForm({
     date: day.date,
     start: day.start,

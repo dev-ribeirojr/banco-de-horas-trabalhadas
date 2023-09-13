@@ -18,7 +18,7 @@ import { AuthContext } from "../../../contexts/auth";
 
 export function Table({ setSave }: Save) {
   const { dadosBanco } = useContext(AuthContext);
-  const [dataDay, setDataDay] = useState<DataDay | null>(null);
+  const [dataDay, setDataDay] = useState<any | null>(null);
 
   // organizando a renderização das tabelas por ano, mes é dia
   dadosBanco?.sort((a: Year, b: Year) => Number(b.year) - Number(a.year));
@@ -37,12 +37,14 @@ export function Table({ setSave }: Save) {
   );
 
   function handleEdit(day: Day, month: string, year: string) {
-    setDataDay({ day, month, year, setDataDay, setSave });
+    setDataDay({ day, month, year });
   }
 
   return (
     <section>
-      {dataDay !== null && <Edit dataDay={dataDay} />}
+      {dataDay !== null && (
+        <Edit data={dataDay} setDataDay={setDataDay} setSave={setSave} />
+      )}
       {dadosBanco?.map((doc: Year) => (
         <section key={doc?.year} className="area-table">
           <h1>Ano / "{doc?.year}"</h1>

@@ -67,10 +67,12 @@ export type Save = {
 };
 
 export type DataDay = {
-  day: Day;
-  month: string;
-  year: string;
-  setDataDay: Dispatch<SetStateAction<DataDay | null>>;
+  data: {
+    day: Day;
+    month: string;
+    year: string;
+  };
+  setDataDay: Dispatch<SetStateAction<any>>;
   setSave: Dispatch<SetStateAction<boolean>>;
 };
 
