@@ -1,12 +1,14 @@
 .area-table {
+  margin-top: 1em;
   width: 100%;
+  border-top: 1px solid var(--pink-normal);
 }
 .area-table h1 {
   text-align: center;
   font-size: 2em;
   background-color: var(--pink-dark);
   color: var(--white-normal);
-  margin-bottom: 1em;
+  margin: 0.5em 0 1em 0;
   border-radius: 1em;
 }
 

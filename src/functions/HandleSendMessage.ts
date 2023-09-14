@@ -24,10 +24,10 @@ export async function handleSendText({
 
   try {
     await emailjs.send(
-      "service_dvclfho",
-      "template_so7fzjk",
+      (import.meta.env.VITE_EMAIL_JS_SERVICE_ID = "service_dvclfho"),
+      (import.meta.env.VITE_EMAIL_JS_TEMPLATE_ID = "template_so7fzjk"),
       templatesParams,
-      "EtMlGndncK2OZa-3E"
+      (import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY = "EtMlGndncK2OZa-3E")
     );
     reset();
     setLoading(false);
@@ -40,7 +40,3 @@ export async function handleSendText({
     handleCleanMessage();
   }
 }
-// process.env.REACT_APP_EMAIL_JS_SERVICE_ID,
-//   process.env.REACT_APP_EMAIL_JS_TEMPLATE_ID,
-//   templatesParams,
-//   process.env.REACT_APP_EMAIL_JS_PUBLIC_KEY;
