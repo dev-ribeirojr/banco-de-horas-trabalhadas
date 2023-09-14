@@ -1,0 +1,17 @@
+<svg width="198" height="198" viewBox="0 0 198 198" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="99" cy="99" r="99" fill="#F3CED6"/>
+  <circle cx="96.5" cy="97.5" r="56" stroke="#D13657" stroke-width="3"/>
+  <circle cx="4.06566" cy="4.06566" r="2.56566" transform="matrix(-1 0 0 1 100.566 93.4343)" stroke="#D13657" stroke-width="3"/>
+  <line x1="95.5808" y1="155" x2="95.5808" y2="144.545" stroke="#D13657" stroke-width="3"/>
+  <line x1="142.384" y1="96.5808" x2="152.838" y2="96.5808" stroke="#D13657" stroke-width="3"/>
+  <line x1="40.1616" y1="97.5808" x2="50.6162" y2="97.5808" stroke="#D13657" stroke-width="3"/>
+  <line x1="56.1921" y1="135.039" x2="68.1921" y2="123.039" stroke="#D13657" stroke-width="3"/>
+  <line x1="58.0867" y1="56.966" x2="69.7849" y2="69.2604" stroke="#D13657" stroke-width="3"/>
+  <line x1="122.994" y1="69.2639" x2="135.587" y2="57.887" stroke="#D13657" stroke-width="3"/>
+  <line x1="95.5808" y1="50.4546" x2="95.5808" y2="40" stroke="#D13657" stroke-width="3"/>
+  <rect x="110.5" y="82.5" width="62" height="23" rx="6.5" fill="#F299AC" stroke="#D13657" stroke-width="3"/>
+  <rect x="110.5" y="105.5" width="62" height="23" rx="6.5" fill="#F299AC" stroke="#D13657" stroke-width="3"/>
+  <rect x="110.5" y="128.5" width="62" height="23" rx="6.5" fill="#F299AC" stroke="#D13657" stroke-width="3"/>
+  <line x1="97" y1="99.0085" x2="97" y2="69.9913" stroke="#D13657" stroke-width="3"/>
+  <line x1="79.9446" y1="97.5" x2="98.0554" y2="97.5" stroke="#D13657" stroke-width="3"/>
+</svg>
