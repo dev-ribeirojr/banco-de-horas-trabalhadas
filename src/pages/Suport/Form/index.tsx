@@ -19,12 +19,12 @@ export function Form() {
 
   const navigate = useNavigate();
 
-  function onSubmit({ text }: Text) {
+  function onSubmit({ text }: { text: string }) {
     setLoading(true);
     const props = {
       text: text,
-      email: user?.email,
-      name: user?.name,
+      email: user?.email!,
+      name: user?.name!,
       setLoading: setLoading,
       setMessageStatus: setMessageStatus,
       reset: reset,

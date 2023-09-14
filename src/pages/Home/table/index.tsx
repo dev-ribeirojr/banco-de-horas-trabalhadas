@@ -2,13 +2,7 @@ import { useContext, useState } from "react";
 import "./table.css";
 import { format, parseISO } from "date-fns";
 
-import {
-  Year,
-  Day,
-  Month,
-  Save,
-  DataDay,
-} from "../../../components/types/HomeTypes";
+import { Year, Day, Month, Save } from "../../../components/types/HomeTypes";
 
 import { MdEdit } from "react-icons/md";
 import { Edit } from "../edit";

@@ -1,5 +1,4 @@
 import emailjs from "@emailjs/browser";
-import { Dispatch, SetStateAction } from "react";
 import { SendText } from "../components/types/SuportTypes";
 
 export async function handleSendText({
