@@ -10,6 +10,7 @@ export type Email = {
 export type UserSignIn = Email & {
   password: string;
 };
+
 export type UserSignUp = UserName & UserSignIn;
 
 export type User = {
