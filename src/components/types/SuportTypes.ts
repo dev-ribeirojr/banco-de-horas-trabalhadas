@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type Text = {
+export type SendMessage = {
   text: string;
 };
 export type SendText = {

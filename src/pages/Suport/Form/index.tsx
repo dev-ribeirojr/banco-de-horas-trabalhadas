@@ -1,20 +1,16 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-import { AuthContext } from "../../../contexts/auth";
-import { useSuportForm } from "../../../hooks/useSuportForm";
-import { handleSendText } from "../../../functions/HandleSendMessage";
-
 import { FaUserAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
+import { AuthContext } from "../../../contexts/auth";
 import { LoadingCircle } from "../../../components/loading";
-
 import StatusText from "../../../components/StatusMessage";
 
-
-
+import { handleSendText } from "../../../functions/HandleSendMessage";
+import { useSuportForm } from "../../../hooks/useSuportForm";
+import { SendMessage } from "../../../components/types/SuportTypes";
 export function Form() {
 
   const navigate = useNavigate()
@@ -24,11 +20,11 @@ export function Form() {
   const [loading, setLoading] = useState<boolean>(false);
   const [messageStatus, setMessageStatus] = useState<string>("");
 
-  function onSubmit({ text }: { text: string }) {
+  function onSubmit(data: SendMessage) {
 
     setLoading(true);
     const props = {
-      text: text,
+      text: data.text,
       email: user?.email!,
       name: user?.name!,
       setLoading: setLoading,

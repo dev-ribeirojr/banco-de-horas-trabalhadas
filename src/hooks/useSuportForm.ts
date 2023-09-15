@@ -1,10 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { SendMessage } from "../components/types/SuportTypes";
 import { schemaSuport } from "../schema/SuportSchema";
-
-type Text = {
-  text: string;
-};
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function useSuportForm() {
   const {
@@ -12,9 +9,9 @@ export function useSuportForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Text>({
+  } = useForm<SendMessage>({
     resolver: zodResolver(schemaSuport),
   });
 
-  return { register, handleSubmit, errors, reset };
+  return { register, reset, handleSubmit, errors };
 }
