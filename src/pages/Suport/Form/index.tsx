@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FaUserAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -12,14 +14,12 @@ import StatusText from "../../../components/StatusMessage";
 import { handleSendText } from "../../../functions/HandleSendMessage";
 import { SendMessage } from "../../../components/types/SuportTypes";
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const schemaSuport = z.object({
   text: z.string().nonempty("Digite sua mensagem!"),
 });
 
-export function FormSuport() {
+export function Form() {
 
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
