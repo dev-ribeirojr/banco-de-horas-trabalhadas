@@ -14,7 +14,6 @@ import StatusText from "../../../components/StatusMessage";
 import { handleSendText } from "../../../functions/HandleSendMessage";
 import { SendMessage } from "../../../components/types/SuportTypes";
 
-
 const schemaSuport = z.object({
   text: z.string().nonempty("Digite sua mensagem!"),
 });
