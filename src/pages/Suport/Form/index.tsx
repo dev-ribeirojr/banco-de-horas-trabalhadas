@@ -1,29 +1,30 @@
-import { useContext, useState } from "react";
 
-import { MdEmail } from "react-icons/md";
-import { FaUserAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useSuportForm } from "../../../hooks/useSuportForm";
 import { handleSendText } from "../../../functions/HandleSendMessage";
-import { AuthContext } from "../../../contexts/auth";
-import { useSuportForm } from "../../../hooks/useSuportForms";
 
+import { FaUserAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../contexts/auth";
 import StatusText from "../../../components/StatusMessage";
+import { useNavigate } from "react-router-dom";
 import { LoadingCircle } from "../../../components/loading";
 
-type DataSuport = {
-  text: string;
-};
+type DataSenText = {
+  text: string
+}
 
 export function Form() {
-  const { user } = useContext(AuthContext);
-  const { register, handleSubmit, reset, errors } = useSuportForm();
+
+  const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
+  const { handleSubmit, register, errors, reset } = useSuportForm()
 
   const [loading, setLoading] = useState<boolean>(false);
   const [messageStatus, setMessageStatus] = useState<string>("");
 
-  const navigate = useNavigate();
+  function onSubmit(data: DataSenText) {
 
-  function onSubmit(data: DataSuport) {
     setLoading(true);
     const props = {
       text: data.text,
@@ -61,7 +62,6 @@ export function Form() {
         id="text"
         placeholder="Digite sua mensagem"
         {...register("text")}
-        maxlength={400}
       />
       {messageStatus !== "" && (
         <StatusText
@@ -90,5 +90,5 @@ export function Form() {
         <button type="submit">{loading ? <LoadingCircle /> : "ENVIAR"}</button>
       </div>
     </form>
-  );
+  )
 }

@@ -53,7 +53,6 @@ export async function handleUpdatePassword({
         return;
       }
       setStatusMessage("Ops! Aconteceu algum erro!");
-      console.log(error);
     }
   }
 }

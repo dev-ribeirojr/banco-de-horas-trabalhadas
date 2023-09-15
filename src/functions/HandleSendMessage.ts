@@ -34,7 +34,6 @@ export async function handleSendText({
     handleCleanMessage();
   } catch (error: any) {
     setLoading(false);
-    console.log(error);
     setMessageStatus("Erro ao enviar a mensagem!");
     handleCleanMessage();
   }

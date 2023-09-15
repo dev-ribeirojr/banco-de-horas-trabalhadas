@@ -42,6 +42,5 @@ export async function handleRecoverPassword({
     setMessageStatus("Error ao enviar o link!");
     handleRecoverStatus(setRecoverStatus);
     setLoading(false);
-    console.log(error);
   }
 }

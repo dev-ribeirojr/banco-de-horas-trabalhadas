@@ -70,7 +70,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       setLoadingLogin(false);
       navigate("/home");
     } catch (error) {
-      console.log(error);
       setLoadingLogin(false);
     }
   }
@@ -97,7 +96,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         handleMessage();
         return;
       }
-      console.log(error);
     }
   }
 
@@ -140,7 +138,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         handleMessage();
         return;
       }
-      console.log(error);
     }
   }
 
@@ -154,7 +151,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem(localStorageKey);
       setUser(null);
     } catch (error: any) {
-      console.log(error);
     }
   }
 

@@ -31,7 +31,6 @@ export async function handleUpdateDadosBanco({
       setSucess(false);
     }, 2000);
   } catch (error) {
-    console.log(error);
     setLoading(false);
   }
 }
