@@ -5,10 +5,14 @@ import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { handleSendText } from "../../../functions/HandleSendMessage";
 import { AuthContext } from "../../../contexts/auth";
-import { useSuportForm } from "../../../hooks/useSuportForm";
+import { useSuportForm } from "../../../hooks/useSuportForms";
 
 import StatusText from "../../../components/StatusMessage";
 import { LoadingCircle } from "../../../components/loading";
+
+type DataSuport = {
+  text: string;
+};
 
 export function Form() {
   const { user } = useContext(AuthContext);
@@ -19,10 +23,10 @@ export function Form() {
 
   const navigate = useNavigate();
 
-  function onSubmit({ text }: { text: string }) {
+  function onSubmit(data: DataSuport) {
     setLoading(true);
     const props = {
-      text: text,
+      text: data.text,
       email: user?.email!,
       name: user?.name!,
       setLoading: setLoading,
@@ -53,7 +57,12 @@ export function Form() {
           <input id="email" type="text" placeholder={user?.email} disabled />
         </label>
       </div>
-      <textarea placeholder="Digite sua mensagem" {...register("text")} />
+      <textarea
+        id="text"
+        placeholder="Digite sua mensagem"
+        {...register("text")}
+        maxlength={400}
+      />
       {messageStatus !== "" && (
         <StatusText
           statusMessage={messageStatus}
