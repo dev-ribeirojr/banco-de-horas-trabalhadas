@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import { FaUserAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -9,14 +10,22 @@ import { LoadingCircle } from "../../../components/loading";
 import StatusText from "../../../components/StatusMessage";
 
 import { handleSendText } from "../../../functions/HandleSendMessage";
-import { useSuportForm } from "../../../hooks/useSuportForm";
 import { SendMessage } from "../../../components/types/SuportTypes";
 
-export default function FormSuport() {
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schemaSuport = z.object({
+  text: z.string().nonempty("Digite sua mensagem!"),
+});
+
+export function FormSuport() {
 
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
-  const { handleSubmit, register, errors, reset } = useSuportForm()
+  const { handleSubmit, register, formState: { errors }, reset } = useForm<SendMessage>(
+    { resolver: zodResolver(schemaSuport) }
+  )
   const [loading, setLoading] = useState<boolean>(false);
   const [messageStatus, setMessageStatus] = useState<string>("");
 
