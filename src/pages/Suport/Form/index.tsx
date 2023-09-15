@@ -11,7 +11,8 @@ import StatusText from "../../../components/StatusMessage";
 import { handleSendText } from "../../../functions/HandleSendMessage";
 import { useSuportForm } from "../../../hooks/useSuportForm";
 import { SendMessage } from "../../../components/types/SuportTypes";
-export function Form() {
+
+export default function Form() {
 
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
