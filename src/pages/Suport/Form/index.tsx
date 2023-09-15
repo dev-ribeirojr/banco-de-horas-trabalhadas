@@ -12,7 +12,7 @@ import { handleSendText } from "../../../functions/HandleSendMessage";
 import { useSuportForm } from "../../../hooks/useSuportForm";
 import { SendMessage } from "../../../components/types/SuportTypes";
 
-export default function Form() {
+export default function FormSuport() {
 
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
