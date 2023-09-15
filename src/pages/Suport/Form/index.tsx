@@ -16,7 +16,6 @@ export function Form() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
   const { handleSubmit, register, errors, reset } = useSuportForm()
-
   const [loading, setLoading] = useState<boolean>(false);
   const [messageStatus, setMessageStatus] = useState<string>("");
 
