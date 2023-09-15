@@ -2,7 +2,7 @@ import "./suport.css";
 
 import Logo from "../../assets/logo-banco.png";
 import { Header } from "../../components/Header";
-import { Form } from "./form/index";
+import { Form } from "./Form/index";
 
 export default function Suport() {
   return (
